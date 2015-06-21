@@ -2,7 +2,7 @@
 ![Building a ngFit App with AngularJS](ngFit.png)
 # Install
 ```sh
-$ git clone https://github.com/Severenit/ngFit.git && cd ngFit
+$ git clone https://github.com/taksenov/angularjs-nggirlsfit.git && cd ngFit
 $ bower install
 $ npm install
 $ gulp
