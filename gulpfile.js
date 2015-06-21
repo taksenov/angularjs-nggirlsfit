@@ -1,0 +1,114 @@
+'use strict';
+
+var gulp = require('gulp'),
+    webserver = require('gulp-webserver'),
+    sass = require('gulp-sass'),
+    concat = require('gulp-concat'),
+    csso = require('gulp-csso');
+
+var bc = './bower_components/';
+
+//Здесь конкатенируется app.js из кастомного кода
+gulp.task('app', function() {
+  gulp.src('builds/development/app/**/*.js')
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('builds/dist/app/'))
+});
+// -----
+
+gulp.task('html', function() {
+  gulp.src('builds/development/**/*.html')
+    .pipe(gulp.dest('builds/dist/'))
+});
+
+gulp.task('sass', function () {
+  gulp.src('builds/development/sass/**/*')
+      .pipe(sass())
+      .pipe(concat('style.min.css'))
+      .pipe(csso())
+      .pipe(gulp.dest('builds/dist/css/'));
+});
+
+gulp.task('img', function() {
+  gulp.src('builds/development/img/**/*')
+    .pipe(gulp.dest('builds/dist/img/'));
+});
+
+// Копирование папки со вспомогательными JS файлами
+gulp.task('jsHelpers', function() {
+  gulp.src('builds/development/js/**/*')
+    .pipe(gulp.dest('builds/dist/js/'));
+});
+// -----
+
+
+gulp.task('watch', function() {
+  gulp.watch('builds/development/app/**/*', ['app']);
+  gulp.watch('builds/development/sass/**/*', ['sass']);
+  gulp.watch('builds/development/**/*.html', ['html']);
+});
+
+gulp.task('libs', function() {
+    gulp.src(bc+'jquery/dist/jquery.js')
+      .pipe(gulp.dest('./builds/dist/libs/jquery/'));
+
+    gulp.src(bc+'bootstrap/dist/**/*.*')
+      .pipe(gulp.dest('./builds/dist/libs/bootstrap/'));
+
+    gulp.src(bc+'bootstrap-material-design/dist/**/*.*')
+      .pipe(gulp.dest('./builds/dist/libs/bootstrap-material-design/'));
+
+    // Копирование библиотеки jasny-bootstrap для бокового меню
+    gulp.src(bc+'jasny-bootstrap/dist/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/jasny-bootstrap/'));
+    // -----
+
+    // Копирование библиотеки bootstrap-datepicker
+    gulp.src(bc+'bootstrap-datepicker/dist/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/bootstrap-datepicker/'));
+    // -----
+
+    // Графики для ангуляра angular-charts
+    gulp.src(bc+'angular-chart.js/dist/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/angular-chart.js/'));
+    gulp.src(bc+'Chart.js/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/Chart.js/'));
+    // -----
+
+    // Подключение angular bootstrap-ui
+    gulp.src(bc+'angular-bootstrap/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/angular-bootstrap/'));
+    // -----
+
+
+    gulp.src([bc+'angular/angular.js',
+            bc+'angular-animate/angular-animate.js',
+            bc+'angular-cookies/angular-cookies.js',
+            bc+'angular-i18n/angular-locale_ru-ru.js',
+            bc+'angular-loader/angular-loader.js',
+            bc+'angular-resource/angular-resource.js',
+            bc+'angular-route/angular-route.js',
+            bc+'angular-sanitize/angular-sanitize.js',
+            bc+'angular-touch/angular-touch.js',
+          ])
+      .pipe(gulp.dest('./builds/dist/libs/angular/'));
+});
+
+gulp.task('webserver', function() {
+  gulp.src('builds/dist/')
+      .pipe(webserver({
+        livereload: true,
+        open: true
+      }));
+});
+
+gulp.task('default', [
+    'libs',
+    'html',
+    'app',
+    'sass',
+    'img',
+    'jsHelpers',
+    'webserver',
+    'watch'
+]);

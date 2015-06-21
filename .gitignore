@@ -1,0 +1,42 @@
+# 2013.01.21
+# yasushisakai ( https://gist.github.com/yasushisakai/4584653#file-gitignore )
+#
+# gitignore for Django using pyCharm
+#
+ 
+#files to ignore
+settings.py
+sitebellib.ini
+
+#extensions to ignore
+*.log
+*.pot
+*.pyc
+ 
+#directories to ignore
+.idea/
+/temp
+/holderjs
+/bower_components
+bower_components
+app/bower_components
+/test-work/app/static/SQLs/
+migrations/
+/node_modules
+
+# ignore at dev-server
+/env
+/logs
+/pids
+/servstatic
+/sphinx
+
+
+
+#production
+/dev
+dev
+/dist
+
+builds/development/libs/**/*
+builds/development/css/style.min.css
