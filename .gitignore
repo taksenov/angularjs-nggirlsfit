@@ -36,7 +36,10 @@ migrations/
 #production
 /dev
 dev
-/dist
+
 
 builds/development/libs/**/*
 builds/development/css/style.min.css
+builds/dist/**/*
+builds/dist/
+builds/dist
