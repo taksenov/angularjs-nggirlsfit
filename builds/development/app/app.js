@@ -1,60 +1,64 @@
-'use strict';
+// author: taksenov@gmail.com
+
 // initialize material design js
-$.material.init();
+;$.material.init();
 
-angular.module("ngGirlsFit", ["chart.js", "ui.bootstrap"])
-  // Optional configuration
-  .config(['ChartJsProvider', function (ChartJsProvider) {
-    // Configure all charts
-    ChartJsProvider.setOptions({
-      colours: ['#199F93', '#FF8A80'],
-      responsive: true //адаптивный или нет график
-    });
-    // Configure all line charts
-    ChartJsProvider.setOptions('Line', {
-      datasetFill: true //закрашивать или нет область под лингией графика
-    });
-  }])
-//    .controller('TabsDemoCtrl', ['$scope', '$window', function ($scope, $window) {
-//  $scope.tabs = [
-//    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-//    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-//  ];
-//
-//  $scope.alertMe = function() {
-//    setTimeout(function() {
-//      $window.alert('You\'ve selected the alert tab!');
-//    });
-//  };
-//}])
-  .controller("LineCtrl", ['$scope', '$timeout', function ($scope, $timeout) {
+(function(){
+    'use strict';
 
-  $scope.labels = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"];
-  $scope.series = ['Бег', 'Бег с ускорением'];
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+    // модуль и конфигурирование
+    angular
+        .module('ngGirlsFit', [
+//            'ui.router',
+//            'ngGirlsFit.main',
+            'ui.router'
+            //'ngGirlsFit.contacts',
+            //'ngGirlsFit.about'
+        ])
+        .config(ngGFConfig);
 
-  // Simulate async data update
-  $timeout(function () {
-    $scope.data = [
-      [28, 48, 40, 19, 86, 27, 90],
-      [65, 59, 80, 81, 56, 55, 40]
-    ];
-  }, 3000);
-}])
+    ngGFConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$logProvider'];
 
-    .controller("BarCtrl", ['$scope', function ($scope) {
-  $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  $scope.series = ['Series A', 'Series B'];
+    function ngGFConfig($stateProvider, $urlRouterProvider, $locationProvider, $logProvider){
+        $locationProvider.html5Mode({
+            enabled: false,
+            requireBase: false
+        });
 
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-}]);
+        $logProvider.debugEnabled(false);
+
+        $urlRouterProvider.otherwise('/');
+
+        $stateProvider
+            // main
+            .state('main', {
+                url: '/',
+                templateUrl: 'app/main/main.html',
+                controller: function ($scope, $rootScope){
+                    $rootScope.curPath = 'main';
+                }
+            })
+            // contacts
+            .state('contacts', {
+                url: '/contacts',
+                templateUrl: 'app/contacts/contacts.html',
+                controller: function ($scope, $rootScope){
+                    $rootScope.curPath = 'contacts';
+                }
+            })
+            //// about
+            .state('about', {
+                url: '/about',
+                templateUrl: 'app/about/about.html',
+                controller: function ($scope, $rootScope){
+                    $rootScope.curPath = 'about';
+                }
+            });
+
+
+
+
+    } // ~ ngGFConfig ~
+
+})();
 
