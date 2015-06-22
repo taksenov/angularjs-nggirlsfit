@@ -5,6 +5,15 @@
 }
 
 
+@media screen and (max-width: 768px) {
+    .gf-profile__wrap-long-words {
+        word-wrap: break-word;
+        font-size: 10px;
+    }
+}
+
+
+
 
 
 

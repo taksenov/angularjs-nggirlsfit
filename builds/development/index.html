@@ -15,9 +15,8 @@
 
     <body>
 
-        <!-- точка входа для ангуляра -->
-        <!--<section class="index-bg-image">-->
-        <section ng-class="{'gf-contacts-bg-image':(curPath == 'contacts'),
+        <!-- открытая часть сайта -->
+        <section ng-show="publicPart" ng-class="{'gf-contacts-bg-image':(curPath == 'contacts'),
                             'index-bg-image':(curPath == 'main'),
                             'gf-about-bg-image':(curPath == 'about')}">
             <div class="container">
@@ -26,14 +25,41 @@
                 <ng-include src="'app/components/navbar-public/navbar-public.html'"></ng-include>
                 <!-- навигация -->
 
+                <!-- контент -->
                 <div ui-view>
-                    <!-- инфо и кнопка регистрации -->
-
-                    <!-- инфо и кнопка регистрации -->
                 </div>
+                <!-- контент -->
 
             </div>
         </section>
+        <!-- открытая часть сайта -->
+
+        <!-- закрытая часть сайта -->
+        <div ng-hide="publicPart">
+
+
+            <!-- секция с картинкой бекгроунда для упражнений -->
+            <section ng-show="publicPartWorkout" class="gf-upper-img hidden-xs">
+            </section>
+            <!-- секция с картинкой бекгроунда для упражнений -->
+
+            <!-- навигация -->
+            <div ng-hide="publicPartWorkout">
+                <ng-include src="'app/components/navbar-private/navbar-private.html'"></ng-include>
+            </div>
+            <div ng-show="publicPartWorkout">
+                <ng-include src="'app/components/navbar-private/navbar-workout-private.html'"></ng-include>
+            </div>
+            <!-- навигация -->
+
+            <!-- контент -->
+            <div class="container" ui-view>
+            </div>
+            <!-- контент -->
+
+        </div>
+        <!-- закрытая часть сайта -->
+
         <!-- точка входа для ангуляра -->
 
         <!-- Others JS Files -->
