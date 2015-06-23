@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 var bc = './bower_components/';
 
 //Здесь конкатенируется app.js из кастомного кода
-gulp.task('app', function() {
+gulp.task('js', function() {
   gulp.src('builds/development/app/**/*.js')
     .pipe(concat('app.js'))
     .pipe(gulp.dest('builds/dist/app/'))
@@ -36,17 +36,19 @@ gulp.task('img', function() {
 
 // Копирование папки со вспомогательными JS файлами
 gulp.task('jsHelpers', function() {
-  gulp.src('builds/development/js/**/*')
-    .pipe(gulp.dest('builds/dist/js/'));
+    gulp.src('builds/development/js/**/*')
+        .pipe(gulp.dest('builds/dist/js/'));
 });
 // -----
 
-
+// вотчеры которые будут отрабатывать автоматом при каком-то изменении
 gulp.task('watch', function() {
-  gulp.watch('builds/development/app/**/*', ['app']);
-  gulp.watch('builds/development/sass/**/*', ['sass']);
-  gulp.watch('builds/development/**/*.html', ['html']);
+    gulp.watch('builds/development/app/**/*.js', ['js']);
+    gulp.watch('builds/development/sass/**/*', ['sass']);
+    gulp.watch('builds/development/**/*.html', ['html']);
+    gulp.watch('builds/development/img/**/*', ['img']);
 });
+// -----
 
 gulp.task('libs', function() {
     gulp.src(bc+'jquery/dist/jquery.js')
@@ -80,6 +82,25 @@ gulp.task('libs', function() {
         .pipe(gulp.dest('./builds/dist/libs/angular-bootstrap/'));
     // -----
 
+    // Подключение angular ui-router
+    gulp.src(bc+'angular-ui-router/release/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/angular-ui-router/'));
+    // -----
+
+    // Подключение angular-bootstrap-material
+    gulp.src(bc+'angular-bootstrap-material/**/*.*')
+        .pipe(gulp.dest('./builds/dist/libs/angular-bootstrap-material/'));
+    // -----
+
+    // Подключение arrive
+    gulp.src(bc+'arrive/minified/*.js')
+        .pipe(gulp.dest('./builds/dist/libs/arrive/'));
+    // -----
+
+    // Подключение angular-bootstrap-datetimepicker
+    gulp.src(bc+'angular-bootstrap-datetimepicker/src/**/*')
+        .pipe(gulp.dest('./builds/dist/libs/angular-bootstrap-datetimepicker/'));
+    // -----
 
     gulp.src([bc+'angular/angular.js',
             bc+'angular-animate/angular-animate.js',
@@ -105,7 +126,7 @@ gulp.task('webserver', function() {
 gulp.task('default', [
     'libs',
     'html',
-    'app',
+    'js',
     'sass',
     'img',
     'jsHelpers',
