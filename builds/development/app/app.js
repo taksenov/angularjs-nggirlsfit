@@ -20,13 +20,13 @@
 //            'ngGirlsFit.main',
             'ui.router',
             'chart.js',
-            'ui.bootstrap',
+            'ui.bootstrap'
 
 
 
 
 
-            'ui.bootstrap.datetimepicker'                // todo это отключить к чертовой матери
+
 
             //'ngGirlsFit.contacts',
             //'ngGirlsFit.about'
@@ -216,6 +216,9 @@
                 url: '/workout',
                 templateUrl: 'app/private/workout/workout.html',
                 controller: function ($scope, $rootScope){
+
+                    angular.element('.gf-left-navigation__list [data-toggle="tooltip"]').tooltip();
+
                     $rootScope.curPath = 'statistics';
                     $rootScope.publicPart = false;
                     $rootScope.publicPartWorkout = true;
