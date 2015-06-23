@@ -56,31 +56,24 @@
                     <div class="row">
 
                         <!-- данный код нужно менять в соответсвии с bootstrap-ui angular чтоб была нормальная директива -->
-                        <!--<div>-->
+                        <div>
 
-                            <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
-                            <!--<ul class="nav nav-tabs gf-statistics__nav-tabs" role="tablist">-->
-                                <!--<li role="presentation" class="active gf-statistics__active-tab"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Детально</a></li>-->
-                                <!--<li role="presentation" class="gf-statistics__not-active-tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Общая</a></li>-->
-                            <!--</ul>-->
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs gf-statistics__nav-tabs" role="tablist">
+                                <li role="presentation" ui-sref-active="gf-statistics__active-tab" class="gf-statistics__not-active-tab">
+                                    <a ui-sref="statistics.detail" href="" role="tab" data-toggle="tab">Детально</a>
+                                </li>
+                                <li role="presentation" ui-sref-active="gf-statistics__active-tab" class="gf-statistics__not-active-tab">
+                                    <a ui-sref="statistics.common" href="" role="tab" data-toggle="tab">Общая</a>
+                                </li>
+                            </ul>
 
-                            <!--&lt;!&ndash; Tab panes &ndash;&gt;-->
-                            <!--<div class="tab-content">-->
-                                <!--<div role="tabpanel" class="tab-pane fade in active" id="home">-->
+                            <!-- Tab panes -->
+                            <div ui-view>
 
+                            </div>
 
-
-                                <!--</div>-->
-
-
-                                <!--<div role="tabpanel" class="tab-pane fade" id="profile">-->
-
-
-
-                                <!--</div>-->
-                            <!--</div>-->
-
-                        <!--</div>-->
+                        </div>
                         <!-- данный код нужно менять в соответсвии с bootstrap-ui angular чтоб была нормальная директива -->
 
                         <!-- angular ui-bootstrap tabs -->
@@ -88,109 +81,16 @@
 
                         <!--<div ng-controller="TabsDemoCtrl">-->
 
-                        <div>
+                        <!--<div>-->
 
 
 
-                            <tabset>
-                                <tab heading="Static title">
-                                    <!--Контент 1...-->
-
-                                        <div class="col-lg-12">
-                                            <div class="text-left">
-                                                <h3>
-                                                    Бег
-                                                </h3>
-                                            </div>
-
-                                            <div>
-                                                __________________________
-                                            </div>
-
-                                            <div ng-controller="LineCtrl">
-                                                <canvas id="line" class="chart chart-line" data="data" labels="labels"
-                                                        legend="true" series="series" click="onClick">
-                                                </canvas>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="text-left">
-                                                <h3>
-                                                    Прыжки
-                                                </h3>
-                                            </div>
-
-                                            <div>
-                                                __________________________
-                                            </div>
-                                            <div ng-controller="LineCtrl">
-                                                <canvas id="line2" class="chart chart-line" data="data" labels="labels"
-                                                        legend="true" series="series" click="onClick">
-                                                </canvas>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="text-left">
-                                                <h3>
-                                                    Подтягивания
-                                                </h3>
-                                            </div>
-
-                                            <div>
-                                                __________________________
-                                            </div>
-                                            <div ng-controller="LineCtrl">
-                                                <canvas id="line3" class="chart chart-line" data="data" labels="labels"
-                                                        legend="true" series="series" click="onClick">
-                                                </canvas>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="text-left">
-                                                <h3>
-                                                    Аэробика
-                                                </h3>
-                                            </div>
-
-                                            <div>
-                                                __________________________
-                                            </div>
-                                            <div ng-controller="LineCtrl">
-                                                <canvas id="line4" class="chart chart-line" data="data" labels="labels"
-                                                        legend="true" series="series" click="onClick">
-                                                </canvas>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="text-left">
-                                                <h3>
-                                                    Приседания
-                                                </h3>
-                                            </div>
-
-                                            <div>
-                                                __________________________
-                                            </div>
-                                            <div ng-controller="LineCtrl">
-                                                <canvas id="line5" class="chart chart-line" data="data" labels="labels"
-                                                        legend="true" series="series" click="onClick">
-                                                </canvas>
-                                            </div>
-
-                                        </div>
-
-                                    <!--Контент 1...-->
-                                </tab>
-
+                            <!--<tabset>-->
                                 <!--<tab heading="Static title">-->
+
+                                <!--</tab>-->
+
+                                <!--&lt;!&ndash;<tab heading="Static title">&ndash;&gt;-->
                                     <!--&lt;!&ndash;Контент 2...&ndash;&gt;-->
 
                                         <!--<div class="col-lg-12">-->
@@ -273,14 +173,14 @@
 
 
                                     <!--&lt;!&ndash;Контент 2...&ndash;&gt;-->
-                                <!--</tab>-->
+                                <!--&lt;!&ndash;</tab>&ndash;&gt;-->
 
 
-                            </tabset>
+                            <!--</tabset>-->
 
-                            <hr />
+                            <!--<hr />-->
 
-                        </div>
+                        <!--</div>-->
                         <!-- angular ui-bootstrap tabs -->
 
 
