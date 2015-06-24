@@ -47,7 +47,7 @@ All values are stored in a file ***builds/development/sass/includes/_stack.scss*
 │   │   │   │   ├──  main/
 │   │   │   │   │   ├──  main.controller.js
 │   │   │   │   │   └──  main.html
-│   │   │   │   └──  app.js
+│   │   │   │   └──  app.module.js
 │   │   │   ├──  fonts/
 │   │   │   ├──  css/
 │   │   │   ├──  img/

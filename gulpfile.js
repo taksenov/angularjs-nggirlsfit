@@ -8,9 +8,15 @@ var gulp = require('gulp'),
 
 var bc = './bower_components/';
 
-//Здесь конкатенируется app.js из кастомного кода
+//Здесь конкатенируется app.js из кастомного кода, внимание сначала нужно собирать модули
 gulp.task('js', function() {
-  gulp.src('builds/development/app/**/*.js')
+    gulp.src(
+        [
+            'builds/development/app/app.js',
+            'builds/development/app/**/*.module.js',
+            'builds/development/app/**/*.js'
+        ]
+    )
     .pipe(concat('app.js'))
     .pipe(gulp.dest('builds/dist/app/'))
 });
