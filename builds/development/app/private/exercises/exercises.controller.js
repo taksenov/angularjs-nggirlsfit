@@ -19,19 +19,51 @@
     modalInstanceCtrl.$inject = [
                                 '$scope', '$modal', '$log', '$rootScope',
                                 'ngfitfire', '$modalInstance',
-                                //'items',
-                                'modalCaption', 'exercise'
+                                'modalCaption', 'exercise',
+                                'isEdit'
                             ];
 
     function modalInstanceCtrl(
                                 $scope, $modal, $log, $rootScope, ngfitfire, $modalInstance,
-                                modalCaption, exercise
+                                modalCaption, exercise,
+                                isEdit
                             ) {
+
+        var vm = this;
 
         $scope.modalCaption = modalCaption;
         $scope.exercise = exercise;
+        vm.isEdit = isEdit;
+
+        vm.exerciseEdit = function () {
+            ngfitfire.exerciseEdit($scope.exercise).then(
+                function () {
+                    $scope.exercise = null;
+                }
+            );
+        }; // ~~~ vm.exerciseEdit ~~~
+
+        vm.exerciseAdd = function () {
+            ngfitfire
+                .exerciseAdd($scope.exercise,
+                    function () {
+                        $scope.exercise = null;
+                    }
+                );
+        }; // ~~~ vm.exerciseAdd ~~~
+
 
         $scope.ok = function () {
+
+            if ( vm.isEdit ) {
+                console.log('Редактируем упражнение');
+                vm.exerciseEdit();
+
+            } else {
+                console.log('Добавляем новое упражнение');
+                vm.exerciseAdd();
+            }
+
             $modalInstance.close();
         };
 
@@ -62,13 +94,15 @@
 
         $scope.animationsEnabled = true;
 
-        ngfitfire.getUserExercises( function (_data) {
+
+        ngfitfire.getUserExercises( function ( _data ) {
             vm.userExercises = _data;
         } ); // ~~~ getUserExercises ~~~
 
-        vm.editUserExercise = function (_exercise) {
+        vm.editUserExercise = function ( _exercise ) {
             $scope.exercise = _exercise;
             $scope.modalCaption = 'Редактировать упражнение';
+            vm.isEdit = true;
             $modal.open(
                         {
                             animation: $scope.animationsEnabled,
@@ -80,16 +114,20 @@
                                 },
                                 exercise: function () {
                                     return $scope.exercise;
+                                },
+                                isEdit: function () {
+                                    return vm.isEdit;
                                 }
                             }
                         }
             ); // ~~~ $modal.open ~~~
-        };
+        }; // ~~~ editUserExercise ~~~
 
-        vm.openModalForAddExercise = function (e) {
+        vm.openModalForAddExercise = function ( e ) {
             e.preventDefault();
             $scope.exercise = null;
             $scope.modalCaption = 'Добавить упражнение';
+            vm.isEdit = false;
             $modal.open(
                         {
                             animation: $scope.animationsEnabled,
@@ -101,11 +139,19 @@
                                 },
                                 exercise: function () {
                                     return $scope.exercise;
+                                },
+                                isEdit: function () {
+                                    return vm.isEdit;
                                 }
                             }
                         }
             ); // ~~~ $modal.open ~~~
-        };
+        }; // ~~~ openModalForAddExercise ~~~
+
+        vm.exerciseDelete = function ( _exercise ) {
+            ngfitfire.exerciseDelete( _exercise );
+        }; // ~~~ vm.exerciseDelete ~~~
+
 
     } // ~~~ exercisesBlocksCtrl ~~~
 
@@ -122,6 +168,7 @@
         vm.editUserExercise = function (_exercise) {
             $scope.exercise = _exercise;
             $scope.modalCaption = 'Редактировать упражнение';
+            vm.isEdit = true;
             $modal.open(
                         {
                             animation: $scope.animationsEnabled,
@@ -133,16 +180,20 @@
                                 },
                                 exercise: function () {
                                     return $scope.exercise;
+                                },
+                                isEdit: function () {
+                                    return vm.isEdit;
                                 }
                             }
                         }
             ); // ~~~ $modal.open ~~~
-        };
+        }; // ~~~ editUserExercise ~~~
 
         vm.openModalForAddExercise = function (e) {
             e.preventDefault();
             $scope.exercise = null;
             $scope.modalCaption = 'Добавить упражнение';
+            vm.isEdit = false;
             $modal.open(
                         {
                             animation: $scope.animationsEnabled,
@@ -154,11 +205,18 @@
                                 },
                                 exercise: function () {
                                     return $scope.exercise;
+                                },
+                                isEdit: function () {
+                                    return vm.isEdit;
                                 }
                             }
                         }
             ); // ~~~ $modal.open ~~~
-        };
+        }; // ~~~ openModalForAddExercise ~~~
+
+        vm.exerciseDelete = function ( _exercise ) {
+            ngfitfire.exerciseDelete( _exercise );
+        }; // ~~~ vm.exerciseDelete ~~~
 
     } // ~~~ exercisesStringsCtrl ~~~
 

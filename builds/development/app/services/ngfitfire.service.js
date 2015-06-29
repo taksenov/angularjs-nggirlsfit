@@ -9,9 +9,9 @@
         .module('ngGirlsFit.firebase.service', ['firebase'])
         .service('ngfitfire', ngfitfire);
 
-    ngfitfire.$inject = ['FIREBASE_URL', '$firebaseObject', '$firebaseArray'];
+    ngfitfire.$inject = ['FIREBASE_URL', '$firebaseObject', '$firebaseArray', '$log'];
 
-    function ngfitfire(FIREBASE_URL, $firebaseObject, $firebaseArray){
+    function ngfitfire(FIREBASE_URL, $firebaseObject, $firebaseArray, $log){
 
         var self = this;
 
@@ -37,11 +37,30 @@
         };
         // ~~~ ~~~
 
+        // добавление нового упражнения
+        self.exerciseAdd = function ( _exercise ) {
+            exercisesRef.push( _exercise );
+        };
+        // ~~~ ~~~
+
+        // редактирование упражнения
+        self.exerciseEdit = function ( _exercise ) {
+            return exercisesArr.$save( _exercise );
+        };
+        // ~~~ ~~~
+
+        // удаление упражнения
+        self.exerciseDelete = function ( _exercise ) {
+            var urlOfExercise = exercisesRef + '/' + _exercise.$id,
+                ref = new Firebase(urlOfExercise);
+
+            return ref.remove();
+        };
+        // ~~~ ~~~
 
 
 
-
-
+        // todo вообще не нужный код, видимо я его дернул из примера на видео
         self.getUsers = function(call_back){
             return usersArr.$loaded( call_back );
         };
@@ -57,9 +76,7 @@
         refArr.$loaded(function(){
             self.dbArr = refArr;
         });
-
-        //console.log( ref );
-
+        // todo вообще не нужный код, видимо я его дернул из примера на видео
 
     }
 
