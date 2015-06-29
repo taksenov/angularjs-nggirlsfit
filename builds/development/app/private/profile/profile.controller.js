@@ -15,7 +15,7 @@
 
 
     profileCtrl.$inject = ['$scope', '$rootScope'];
-    profileAccountCtrl.$inject = ['$scope', '$rootScope'];
+    profileAccountCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire'];
     profilePasswordCtrl.$inject = ['$scope', '$rootScope'];
     profileAchivmentsCtrl.$inject = ['$scope', '$rootScope'];
     profileDesignCtrl.$inject = ['$scope', '$rootScope'];
@@ -27,9 +27,24 @@
         $rootScope.publicPartWorkout = false;
 
     } // ~~~ profileCtrl ~~~
-    function profileAccountCtrl($scope, $rootScope) {
+
+    function profileAccountCtrl($scope, $rootScope, ngfitfire) {
+
+        var vm = this;
+
+        // todo Добавление тестового пользователя в профиль, удалить после тестирования
+        ngfitfire.getTestUser( function (_data) {
+            vm.testUser = _data;
+
+            $rootScope.testUserNameRootScope = vm.testUser.name;
+
+            //console.log( vm.testUser.name );
+
+        } );
+
 
     } // ~~~ profileAccountCtrl ~~~
+
     function profilePasswordCtrl($scope, $rootScope) {
 
     } // ~~~ profilePasswordCtrl ~~~

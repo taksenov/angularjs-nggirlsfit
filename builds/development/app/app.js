@@ -16,20 +16,22 @@
     // модуль и конфигурирование
     angular
         .module('ngGirlsFit', [
+            'firebase',
+            'ngGirlsFit.main',
             'ngGirlsFit.about',
             'ngGirlsFit.contacts',
+            'ngGirlsFit.profile',
             'ngGirlsFit.workout',
             'ngGirlsFit.exercises',
             'ngGirlsFit.statistics',
-            'ngGirlsFit.profile',
             'ngGirlsFit.error404',
-            'ngGirlsFit.main',
             'ngGirlsFit.charts',
+            'ngGirlsFit.firebase.service',
             'ui.router',
             'chart.js',
             'ui.bootstrap'
         ])
-
+        .constant('FIREBASE_URL', 'https://nggirlsfit.firebaseio.com/')
         .config(ngGFConfig);
 
     ngGFConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$logProvider'];

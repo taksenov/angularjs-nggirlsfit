@@ -3,38 +3,50 @@
                             <fieldset>
                                 <legend>Учетная запись</legend>
                                 <div class="form-group">
-                                    <label for="inputName" class="col-lg-4 control-label">Имя пользователя</label>
+                                    <label for="inputName"
+                                           class="col-lg-4 control-label"
+                                            >Имя пользователя</label>
 
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Имя пользователя">
+                                        <input type="text" class="form-control" id="inputName" placeholder="Имя пользователя"
+                                            ng-model="vm.testUser.name"
+                                                >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail" class="col-lg-4 control-label">Электронная почта</label>
 
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Электронная почта">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Электронная почта"
+                                            ng-model="vm.testUser.email"
+                                                >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputWeight" class="col-lg-4 control-label">Масса тела</label>
 
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="inputWeight" placeholder="Масса тела">
+                                        <input type="text" class="form-control" id="inputWeight" placeholder="Масса тела"
+                                            ng-model="vm.testUser.weight"
+                                                >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputHeight" class="col-lg-4 control-label">Рост</label>
 
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="inputHeight" placeholder="Рост">
+                                        <input type="text" class="form-control" id="inputHeight" placeholder="Рост"
+                                            ng-model="vm.testUser.height"
+                                                >
                                     </div>
                                 </div>
                                 <div class="form-group" id="dateOfBirthInput">
                                     <label for="inputDateOfBirth" class="col-lg-4 control-label">Дата рождения</label>
 
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="inputDateOfBirth" placeholder="Дата рождения">
+                                        <input type="text" class="form-control" id="inputDateOfBirth" placeholder="Дата рождения"
+                                            ng-model="vm.testUser.birthday"
+                                                >
 
 <!--<div class="dropdown">-->
 

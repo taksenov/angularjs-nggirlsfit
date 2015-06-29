@@ -117,6 +117,11 @@ gulp.task('libs', function() {
             bc+'angular-route/angular-route.js',
             bc+'angular-sanitize/angular-sanitize.js',
             bc+'angular-touch/angular-touch.js',
+
+            // подключение firebase + angularFire
+            bc+'firebase/firebase.js',
+            bc+'angularfire/dist/angularfire.js',
+
           ])
       .pipe(gulp.dest('./builds/dist/libs/angular/'));
 });

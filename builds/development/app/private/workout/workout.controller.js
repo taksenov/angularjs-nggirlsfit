@@ -12,7 +12,11 @@
     workoutCtrl.$inject = ['$scope', '$rootScope'];
 
     function workoutCtrl($scope, $rootScope) {
-        $rootScope.curPath = 'statistics';
+
+        // всплывающая подсказка над ачивками, больше не удаляй!
+        angular.element('.gf-left-navigation__list [data-toggle="tooltip"]').tooltip();
+
+        $rootScope.curPath = 'workout';
         $rootScope.publicPart = false;
         $rootScope.publicPartWorkout = true;
     }

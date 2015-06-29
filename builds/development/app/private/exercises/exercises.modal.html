@@ -1,0 +1,90 @@
+<!-- Модальное окно для добавления нового упражнения -->
+
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">×</button>
+        <!--<h4 class="modal-title">Добавить упражнение ~*~ Изменить упражнение</h4>-->
+        <h4 class="modal-title">{{ modalCaption }}</h4>
+    </div>
+
+    <div class="modal-body">
+
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label for="inputExerciseName" class="col-lg-4 control-label">Название</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseName"
+                               placeholder="Название"
+                               ng-model="exercise.name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputExerciseText" class="col-lg-4 control-label">Описание</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseText"
+                               placeholder="Описание"
+                               ng-model="exercise.description">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputExerciseImg" class="col-lg-4 control-label">Картинка</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseImg"
+                               placeholder="Картинка"
+                               ng-model="exercise.img">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputExerciseVideo" class="col-lg-4 control-label">Видео</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseVideo"
+                               placeholder="Видео"
+                               ng-model="exercise.video">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputExerciseApproachCount" class="col-lg-4 control-label">Количество упражнений</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseApproachCount"
+                               placeholder="Количество упражнений"
+                               ng-model="exercise.exerciseCount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputExerciseRepeatCount" class="col-lg-4 control-label">Количество подходов</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseRepeatCount"
+                               placeholder="Количество подходов"
+                               ng-model="exercise.repeatCount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputExerciseLeadTime" class="col-lg-4 control-label">Время выполнения</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control"
+                               id="inputExerciseLeadTime"
+                               placeholder="Время выполнения"
+                               ng-model="exercise.time">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-success" ng-click="ok()">Сохранить</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Отменить</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+
+<!-- Модальное окно для добавления нового упражнения -->
+
+

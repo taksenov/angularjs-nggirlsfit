@@ -16,6 +16,10 @@
     statisticsDetailCtrl.$inject = ['$scope', '$rootScope'];
 
     function statisticsCtrl($scope, $rootScope) {
+
+        // всплывающая подсказка над ачивками, больше не удаляй!
+        angular.element('.gf-left-navigation__list [data-toggle="tooltip"]').tooltip();
+
         $rootScope.curPath = 'statistics';
         $rootScope.publicPart = false;
         $rootScope.publicPartWorkout = false;
