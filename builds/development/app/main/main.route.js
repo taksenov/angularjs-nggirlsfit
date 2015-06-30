@@ -15,9 +15,19 @@
         $stateProvider
             .state('main', {
                 url: '/',
-                templateUrl: 'app/main/main.html',
-                controller: 'MainCtrl',
-                controllerAs: 'vm'
+                views : {
+                    'navbarPublick' : {
+                        templateUrl: 'app/components/navbar-public/navbar-public.html',
+                        controller: 'OpenModalSingInCtrl',
+                        controllerAs: 'vm'
+                    },
+                    'mainContent' : {
+                        templateUrl: 'app/main/main.html',
+                        controller: 'MainCtrl',
+                        controllerAs: 'vm'
+                    }
+                }
+
             }) // main
         ;
     }

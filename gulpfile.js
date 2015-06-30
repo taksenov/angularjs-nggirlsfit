@@ -108,6 +108,12 @@ gulp.task('libs', function() {
         .pipe(gulp.dest('./builds/dist/libs/angular-bootstrap-datetimepicker/'));
     // -----
 
+    // Подключение шрифта с иконками whhg
+    gulp.src('builds/development/non_bower_components/whhg-font/**/*')
+        .pipe(gulp.dest('./builds/dist/libs/whhg-font/'));
+    // -----
+
+
     gulp.src([bc+'angular/angular.js',
             bc+'angular-animate/angular-animate.js',
             bc+'angular-cookies/angular-cookies.js',

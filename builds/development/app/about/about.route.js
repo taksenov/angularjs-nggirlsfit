@@ -15,9 +15,19 @@
         $stateProvider
             .state('about', {
                 url: '/about',
-                templateUrl: 'app/about/about.html',
-                controller: 'AboutCtrl',
-                controllerAs: 'vm'
+                views : {
+                    'navbarPublick' : {
+                        templateUrl: 'app/components/navbar-public/navbar-public.html',
+                        controller: 'OpenModalSingInCtrl',
+                        controllerAs: 'vm'
+                    },
+                    'mainContent' : {
+                        templateUrl: 'app/about/about.html',
+                        controller: 'AboutCtrl',
+                        controllerAs: 'vm'
+                    }
+                }
+
             });
     }
 

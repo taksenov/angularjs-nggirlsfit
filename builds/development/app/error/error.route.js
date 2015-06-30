@@ -14,9 +14,18 @@
     function route($stateProvider) {
         $stateProvider
             .state('error', {
-                templateUrl: 'app/error/error.html',
-                controller: 'Error404Ctrl',
-                controllerAs: 'vm'
+                views : {
+                    'navbarPublick' : {
+                        templateUrl: 'app/components/navbar-public/navbar-public.html',
+                        controller: 'OpenModalSingInCtrl',
+                        controllerAs: 'vm'
+                    },
+                    'mainContent' : {
+                        templateUrl: 'app/error/error.html',
+                        controller: 'Error404Ctrl',
+                        controllerAs: 'vm'
+                    }
+                }
             }) // 404 error
         ;
     }

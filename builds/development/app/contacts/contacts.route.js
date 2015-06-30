@@ -15,9 +15,18 @@
         $stateProvider
             .state('contacts', {
                 url: '/contacts',
-                templateUrl: 'app/contacts/contacts.html',
-                controller: 'ContactsCtrl',
-                controllerAs: 'vm'
+                views : {
+                    'navbarPublick': {
+                        templateUrl: 'app/components/navbar-public/navbar-public.html',
+                        controller: 'OpenModalSingInCtrl',
+                        controllerAs: 'vm'
+                    },
+                    'mainContent' : {
+                        templateUrl: 'app/contacts/contacts.html',
+                        controller: 'ContactsCtrl',
+                        controllerAs: 'vm'
+                    }
+                }
             });
     }
 

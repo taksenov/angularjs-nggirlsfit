@@ -24,11 +24,13 @@
             <div class="container">
 
                 <!-- навигация -->
-                <ng-include src="'app/components/navbar-public/navbar-public.html'"></ng-include>
+                <!--<ng-include src="'app/components/navbar-public/navbar-public.html'"></ng-include>-->
+                <div ui-view="navbarPublick">
+                </div>
                 <!-- навигация -->
 
                 <!-- контент -->
-                <div ui-view>
+                <div ui-view="mainContent">
                 </div>
                 <!-- контент -->
 

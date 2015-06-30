@@ -12,7 +12,7 @@
                     </div>
                     <div class="hidden-xs hidden-sm col-md-6 col-lg-6 text-right gf-navbar__navigation">
                         <ul class="gf-navbar__mainlist text-right">
-                            <li class="gf-navbar__lists"><a ui-sref="profile.account" href="" class="gf-navbar__link">Войти</a></li>
+                            <li class="gf-navbar__lists"><a href="" class="gf-navbar__link" ng-click="vm.openModalSingIn($event)">Войти</a></li>
                             <li class="gf-navbar__lists"><a ui-sref="contacts" href="" class="gf-navbar__link">Контакты</a></li>
                             <li class="gf-navbar__lists"><a ui-sref="about" href="" class="gf-navbar__link">О нас</a></li>
                         </ul>
@@ -35,7 +35,7 @@
                             <ul class="gf-navbar__mainlist text-center">
                                 <li class="gf-navbar__lists-xs"><a ui-sref="about" href="" class="gf-navbar__link">О нас</a></li>
                                 <li class="gf-navbar__lists-xs"><a ui-sref="contacts" href="" class="gf-navbar__link">Контакты</a></li>
-                                <li class="gf-navbar__lists-xs"><a ui-sref="profile.account" href="" class="gf-navbar__link">Войти</a></li>
+                                <li class="gf-navbar__lists-xs"><a href="" class="gf-navbar__link" ng-click="vm.openModalSingIn($event)">Войти</a></li>
                             </ul>
                         </div>
                     </div>

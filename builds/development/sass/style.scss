@@ -7,6 +7,7 @@
 @import "../libs/bootstrap-material-design/css/ripples.css";
 @import "../libs/angular-chart.js/angular-chart.css";
 @import "../libs/angular-bootstrap-datetimepicker/css/datetimepicker.css";
+@import "../libs/whhg-font/css/whhg.css";
 //=== === ===
 // Our SASS Files
 @import "includes/varibles";
@@ -22,6 +23,7 @@
 @import "includes/workout";
 @import "includes/contacts";
 @import "includes/page404";
+@import "includes/auth-modal";
 // Some Styles...
 body {
   width: 100%;

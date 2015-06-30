@@ -6,7 +6,11 @@
     'use strict';
 
     angular
-        .module('ngGirlsFit.main', ['ui.router']);
+        .module('ngGirlsFit.main', [
+            'ui.router',
+            'ngGirlsFit.auth-modal',
+            'ui.bootstrap'
+        ]);
 
 })();
 

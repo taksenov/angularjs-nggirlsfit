@@ -27,6 +27,8 @@
             'ngGirlsFit.error404',
             'ngGirlsFit.charts',
             'ngGirlsFit.firebase.service',
+            'ngGirlsFit.auth-modal',
+            'authfire.factory',
             'ui.router',
             'chart.js',
             'ui.bootstrap'
@@ -42,14 +44,15 @@
             requireBase: false
         });
 
-        $logProvider.debugEnabled(false);
+        $logProvider.debugEnabled( true );
 
         $urlRouterProvider.otherwise(function ($injector, $location) {
             $injector.invoke(['$state', function ($state) { $state.go('error'); }]);
             return true;
         }); // ~~~ $urlRouterProvider ~~~
             // это сдернуто из интернета для страницы 404,
-            // ~~~ https://www.snip2code.com/Snippet/151390/Show-Not-Found-(404)-page-without-changi todo разобраться что такое invoke
+            // ~~~ https://www.snip2code.com/Snippet/151390/Show-Not-Found-(404)-page-without-changi
+            // todo разобраться что такое invoke
 
         $urlRouterProvider
             .when('', '/')
