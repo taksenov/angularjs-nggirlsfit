@@ -18,6 +18,15 @@
                 templateUrl: 'app/private/workout/workout.html',
                 controller: 'WorkoutCtrl',
                 controllerAs: 'vm'
+
+                ,
+                resolve: {
+                    'currentAuth' : function ( AuthfireFactory, $rootScope ) {
+                        $rootScope.publicPart = false;
+                        return AuthfireFactory.ngAuth().$requireAuth();
+                    }
+                }
+
             });
     }
 

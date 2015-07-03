@@ -10,15 +10,15 @@
 
     <div class="modal-body">
 
-        <form class="form-horizontal">
+        <form name="signInForm" class="form-horizontal">
             <fieldset>
                 <div class="form-group">
-                    <label for="inputSingInLogin" class="col-lg-4 control-label">Логин</label>
+                    <label for="inputSingInLogin" class="col-lg-4 control-label">Электронная почта</label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control"
+                        <input type="email" class="form-control"
                                id="inputSingInLogin"
-                               placeholder="Логин"
-                               ng-model="exercise.name"
+                               placeholder="Электронная почта"
+                               ng-model="credentials.email"
                                 >
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                         <input type="password" class="form-control"
                                id="inputSingInPassword"
                                placeholder="Пароль"
-                               ng-model="exercise.description"
+                               ng-model="credentials.password"
                                 >
                     </div>
                 </div>

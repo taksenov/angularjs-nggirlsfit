@@ -10,7 +10,7 @@
 
     <div class="modal-body">
 
-        <form class="form-horizontal">
+        <form name="signUpForm" class="form-horizontal">
             <fieldset>
 
                 <div class="form-group">
@@ -23,7 +23,7 @@
                         <input type="text" class="form-control"
                                id="inputSingUpName"
                                placeholder="Имя"
-
+                               ng-model="newUserData.name"
                                 >
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <input type="email" class="form-control"
                                id="inputSingUpEmail"
                                placeholder="Электронная почта"
-
+                               ng-model="newUserData.email"
                                 >
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         <input type="password" class="form-control"
                                id="inputSingUpPassword"
                                placeholder="Пароль"
-
+                               ng-model="newUserData.password"
                                 >
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <div class="col-lg-12 text-center">
                         <div class="gf-auth-modal__manual-singn-in_buttons">
-                            <button type="submit" class="btn btn-success" ng-click="ok()">Войти</button>
+                            <button type="submit" class="btn btn-success" ng-click="ok()">Регистрация</button>
                             <button class="btn btn-warning" ng-click="cancel()">Отменить</button>
                         </div>
                     </div>

@@ -56,11 +56,11 @@
         $scope.ok = function () {
 
             if ( vm.isEdit ) {
-                console.log('Редактируем упражнение');
+                $log.debug('Редактируем упражнение');
                 vm.exerciseEdit();
 
             } else {
-                console.log('Добавляем новое упражнение');
+                $log.debug('Добавляем новое упражнение');
                 vm.exerciseAdd();
             }
 

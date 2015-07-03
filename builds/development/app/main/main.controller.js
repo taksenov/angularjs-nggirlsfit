@@ -11,10 +11,16 @@
         .controller('OpenModalSingInCtrl', openModalSingInCtrl)
     ;
 
-    mainCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire', '$modal'];
-    openModalSingInCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire', '$modal'];
+    mainCtrl.$inject = [ '$scope', '$rootScope',
+                         'ngfitfire', '$modal',
+                         'AuthfireFactory' ];
+    openModalSingInCtrl.$inject = [ '$scope', '$rootScope',
+                                    'ngfitfire', '$modal',
+                                    'AuthfireFactory', 'FIREBASE_URL' ];
 
-    function mainCtrl($scope, $rootScope, ngfitfire, $modal) {
+    function mainCtrl( $scope, $rootScope,
+                       ngfitfire, $modal,
+                       AuthfireFactory ) {
 
         var vm = this;
 
@@ -42,7 +48,9 @@
 
     } // ~~~ mainCtrl ~~~
 
-    function openModalSingInCtrl($scope, $rootScope, ngfitfire, $modal) {
+    function openModalSingInCtrl( $scope, $rootScope,
+                                  ngfitfire, $modal,
+                                  AuthfireFactory, FIREBASE_URL ) {
 
         var vm = this;
 
@@ -64,6 +72,11 @@
                 }
             ); // ~~~ $modal.open ~~~
         }; // ~~~ openModalSingIn ~~~
+
+        vm.logout = function (  ) {
+            AuthfireFactory.logout();
+        }; // ~~~ vm.logout ~~~
+
     } // ~~~ openModalSingInCtrl ~~~
 
 })();

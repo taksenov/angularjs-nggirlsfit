@@ -25,8 +25,20 @@
                         templateUrl: 'app/about/about.html',
                         controller: 'AboutCtrl',
                         controllerAs: 'vm'
+
+                        //,
+                        //resolve: {
+                        //    'currentAuth' : function ( AuthfireFactory, $rootScope ) {
+                        //        $rootScope.publicPart = true;
+                        //        return AuthfireFactory.ngAuth().$requireAuth();
+                        //    }
+                        //}
+
                     }
                 }
+
+
+
 
             });
     }
