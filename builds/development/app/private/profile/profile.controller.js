@@ -14,21 +14,32 @@
         .controller('ProfileDesignCtrl', profileDesignCtrl);
 
 
-    profileCtrl.$inject = ['$scope', '$rootScope'];
-    profileAccountCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire'];
+    profileCtrl.$inject = [ '$scope', '$rootScope',
+                            'AuthfireFactory' ];
+    profileAccountCtrl.$inject = [ '$scope', '$rootScope',
+                                   'ngfitfire', 'AuthfireFactory' ];
     profilePasswordCtrl.$inject = ['$scope', '$rootScope'];
     profileAchivmentsCtrl.$inject = ['$scope', '$rootScope'];
     profileDesignCtrl.$inject = ['$scope', '$rootScope'];
 
-    function profileCtrl($scope, $rootScope) {
+    function profileCtrl( $scope, $rootScope,
+                          AuthfireFactory ) {
+
+        var vm = this;
 
         $rootScope.curPath = 'profile';
         $rootScope.publicPart = false;
         $rootScope.publicPartWorkout = false;
 
+        vm.logout = function (  ) {
+            console.log( 'Пользователь должен выйти из системы.' );
+            AuthfireFactory.logout();
+        }; // ~~~ vm.logout ~~~
+
     } // ~~~ profileCtrl ~~~
 
-    function profileAccountCtrl($scope, $rootScope, ngfitfire) {
+    function profileAccountCtrl( $scope, $rootScope,
+                                 ngfitfire, AuthfireFactory ) {
 
         var vm = this;
 
@@ -41,7 +52,6 @@
             //console.log( vm.testUser.name );
 
         } );
-
 
     } // ~~~ profileAccountCtrl ~~~
 

@@ -13,7 +13,9 @@
         .controller('ModalInstanceCtrl', modalInstanceCtrl)
     ;
 
-    exercisesCtrl.$inject = ['$scope', '$rootScope',  'ngfitfire', '$modal'];
+    exercisesCtrl.$inject = [ '$scope', '$rootScope',
+                              'ngfitfire', '$modal',
+                              'AuthfireFactory' ];
     exercisesBlocksCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire', '$modal'];
     exercisesStringsCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire', '$modal'];
     modalInstanceCtrl.$inject = [
@@ -73,7 +75,9 @@
 
     } // ~~~ modalInstanceCtrl ~~~
 
-    function exercisesCtrl($scope, $rootScope, ngfitfire, $modal) {
+    function exercisesCtrl( $scope, $rootScope,
+                            ngfitfire, $modal,
+                            AuthfireFactory ) {
 
         var vm = this;
 
@@ -85,6 +89,11 @@
         $rootScope.curPath = 'exercises';
         $rootScope.publicPart = false;
         $rootScope.publicPartWorkout = false;
+
+        vm.logout = function (  ) {
+            console.log( 'Пользователь должен выйти из системы.' );
+            AuthfireFactory.logout();
+        }; // ~~~ vm.logout ~~~
 
     } // ~~~ exercisesCtrl ~~~
 

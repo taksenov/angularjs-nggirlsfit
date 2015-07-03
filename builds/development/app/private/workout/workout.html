@@ -11,7 +11,7 @@
 
                         <div class="gf-left-navigation">
                             <div class="gf-left-navigation__username">
-                                {{ testUserNameRootScope }}
+                                {{ currentUser.name }}
                             </div>
                             <div class="gf-left-navigation__achivments center-block text-center">
                                 <div class="gf-left-navigation__achivments_center">
@@ -42,7 +42,7 @@
 
                     <div class="gf-left-navigation__buttons gf-workout-navigation__btnexit-lg-screens">
                         <div class="btn-group-vertical center-block">
-                            <a href="javascript:void(0)" class="btn btn-flat btn-default">Выход</a>
+                            <a ng-click="vm.logout()" href="#/" class="btn btn-flat btn-default">Выход</a>
                         </div>
                     </div>
 
@@ -90,7 +90,7 @@
 
                     <div class="gf-left-navigation__buttons">
                         <div class="btn-group-vertical center-block">
-                            <a href="javascript:void(0)" class="btn btn-flat btn-default">Выход</a>
+                            <a ng-click="vm.logout()" href="#/" class="btn btn-flat btn-default">Выход</a>
                         </div>
                     </div>
 

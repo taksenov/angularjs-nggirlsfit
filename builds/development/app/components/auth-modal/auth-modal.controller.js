@@ -44,6 +44,27 @@
                 'UserPassword =', $scope.credentials.password  );
         }; // ~~~ vm.login ~~~
 
+        $scope.twitterLogin = function (  ) {
+
+            AuthfireFactory.twitterLogin(  );
+            $modalInstance.close();
+
+        }; // ~~~ vm.twitterLogin ~~~
+
+        $scope.facebookLogin = function (  ) {
+
+            AuthfireFactory.facebookLogin(  );
+            $modalInstance.close();
+
+        }; // ~~~ vm.facebookLogin ~~~
+
+        $scope.googleLogin = function (  ) {
+
+            AuthfireFactory.googleLogin(  );
+            $modalInstance.close();
+
+        }; // ~~~ vm.googleLogin ~~~
+
         $scope.ok = function () {
 
             if ( !$scope.credentials.email || !$scope.credentials.password ) {
@@ -82,6 +103,27 @@
                 'Email =', $scope.newUserData.email,
                 'UserPassword =', $scope.newUserData.password  );
         }; // ~~~ vm.login ~~~
+
+        $scope.twitterLogin = function (  ) {
+
+            AuthfireFactory.twitterLogin(  );
+            $modalInstance.close();
+
+        }; // ~~~ vm.twitterLogin ~~~
+
+        $scope.facebookLogin = function (  ) {
+
+            AuthfireFactory.facebookLogin(  );
+            $modalInstance.close();
+
+        }; // ~~~ vm.facebookLogin ~~~
+
+        $scope.googleLogin = function (  ) {
+
+            AuthfireFactory.googleLogin(  );
+            $modalInstance.close();
+
+        }; // ~~~ vm.googleLogin ~~~
 
         $scope.ok = function () {
             if ( !$scope.newUserData.email ||

@@ -14,7 +14,7 @@
 
                         <div class="gf-left-navigation">
                             <div class="gf-left-navigation__username">
-                                {{ testUserNameRootScope }}
+                                {{ currentUser.name }}
                             </div>
                             <div class="gf-left-navigation__achivments center-block text-center">
                                 <div class="gf-left-navigation__achivments_center">
@@ -45,7 +45,7 @@
 
                     <div class="gf-left-navigation__buttons">
                         <div class="btn-group-vertical center-block">
-                            <a href="javascript:void(0)" class="btn btn-flat btn-default">Выход</a>
+                            <a ng-click="vm.logout()" href="#/" class="btn btn-flat btn-default">Выход</a>
                         </div>
                     </div>
 
@@ -55,7 +55,6 @@
 
                     <div class="row">
 
-                        <!-- данный код нужно менять в соответсвии с bootstrap-ui angular чтоб была нормальная директива -->
                         <div>
 
                             <!-- Nav tabs -->
@@ -74,116 +73,6 @@
                             </div>
 
                         </div>
-                        <!-- данный код нужно менять в соответсвии с bootstrap-ui angular чтоб была нормальная директива -->
-
-                        <!-- angular ui-bootstrap tabs -->
-
-
-                        <!--<div ng-controller="TabsDemoCtrl">-->
-
-                        <!--<div>-->
-
-
-
-                            <!--<tabset>-->
-                                <!--<tab heading="Static title">-->
-
-                                <!--</tab>-->
-
-                                <!--&lt;!&ndash;<tab heading="Static title">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;Контент 2...&ndash;&gt;-->
-
-                                        <!--<div class="col-lg-12">-->
-                                            <!--<div class="text-left">-->
-                                                <!--<h3>-->
-                                                    <!--Аэробика-->
-                                                <!--</h3>-->
-                                            <!--</div>-->
-
-                                            <!--<div>-->
-                                                <!--__________________________-->
-                                            <!--</div>-->
-                                            <!--<div ng-controller="LineCtrl">-->
-                                                <!--<canvas id="line6" class="chart chart-line" data="data" labels="labels"-->
-                                                        <!--legend="true" series="series" click="onClick">-->
-                                                <!--</canvas>-->
-                                            <!--</div>-->
-
-                                        <!--</div>-->
-
-                                        <!--<div class="col-lg-12">-->
-                                            <!--<div class="text-left">-->
-                                                <!--<h3>-->
-                                                    <!--Приседания-->
-                                                <!--</h3>-->
-                                            <!--</div>-->
-
-                                            <!--<div>-->
-                                                <!--__________________________-->
-                                            <!--</div>-->
-                                            <!--<div ng-controller="LineCtrl">-->
-                                                <!--<canvas id="line7" class="chart chart-line" data="data" labels="labels"-->
-                                                        <!--legend="true" series="series" click="onClick">-->
-                                                <!--</canvas>-->
-                                            <!--</div>-->
-
-                                        <!--</div>-->
-
-
-                                        <!--<div class="col-lg-12">-->
-                                            <!--<div class="text-left">-->
-                                                <!--<h3>-->
-                                                    <!--Статитстика за все время-->
-                                                <!--</h3>-->
-                                            <!--</div>-->
-
-                                            <!--<div>-->
-                                                <!--__________________________-->
-                                            <!--</div>-->
-
-                                            <!--<div ng-controller="BarCtrl">-->
-                                                <!--<canvas id="bar" class="chart chart-bar" data="data"-->
-                                                        <!--labels="labels"></canvas>-->
-                                            <!--</div>-->
-
-                                        <!--</div>-->
-
-
-
-                                        <!--<div class="col-lg-12">-->
-                                            <!--<div class="text-left">-->
-                                                <!--<h3>-->
-                                                    <!--Приседания-->
-                                                <!--</h3>-->
-                                            <!--</div>-->
-
-                                            <!--<div>-->
-                                                <!--__________________________-->
-                                            <!--</div>-->
-                                            <!--<div ng-controller="LineCtrl">-->
-                                                <!--<canvas id="line8" class="chart chart-line" data="data" labels="labels"-->
-                                                        <!--legend="true" series="series" click="onClick">-->
-                                                <!--</canvas>-->
-                                            <!--</div>-->
-
-                                        <!--</div>-->
-
-
-
-
-
-                                    <!--&lt;!&ndash;Контент 2...&ndash;&gt;-->
-                                <!--&lt;!&ndash;</tab>&ndash;&gt;-->
-
-
-                            <!--</tabset>-->
-
-                            <!--<hr />-->
-
-                        <!--</div>-->
-                        <!-- angular ui-bootstrap tabs -->
-
-
 
 
                     </div>
