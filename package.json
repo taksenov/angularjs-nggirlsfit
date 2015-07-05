@@ -7,16 +7,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Severenit/ngFit.git"
+    "url": "https://github.com/taksenov/angularjs-nggirlsfit.git"
   },
   "keywords": [
     "ngFit",
     "angualrjs"
   ],
-  "author": "Zar Zakharov",
+  "author": "Timofey aksyonov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Severenit/ngFit/issues"
+    "url": "https://github.com/taksenov/angularjs-nggirlsfit.git"
   },
   "devDependencies": {
     "gulp": "^3.8.8",

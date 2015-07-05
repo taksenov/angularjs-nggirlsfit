@@ -9,45 +9,54 @@
         .module('ngGirlsFit.firebase.service', ['firebase'])
         .service('ngfitfire', ngfitfire);
 
-    ngfitfire.$inject = ['FIREBASE_URL', '$firebaseObject', '$firebaseArray', '$log'];
+    ngfitfire.$inject = [ 'FIREBASE_URL', '$firebaseObject',
+                          '$firebaseArray', '$log',
+                          '$rootScope' ];
 
-    function ngfitfire(FIREBASE_URL, $firebaseObject, $firebaseArray, $log){
+    function ngfitfire( FIREBASE_URL, $firebaseObject,
+                        $firebaseArray, $log,
+                        $rootScope ){
 
         var self = this;
 
         var ref = new Firebase( FIREBASE_URL );
-        var refObj = $firebaseObject( ref );
-        var refArr = $firebaseArray( ref );
+        //var refObj = $firebaseObject( ref );
+        //var refArr = $firebaseArray( ref );
         var usersRef = ref.child('users');
-        var usersArr = $firebaseArray(usersRef);
+        //var usersArr = $firebaseArray(usersRef);
         var exercisesRef = ref.child( 'exercises' );
-        var exercisesArr = $firebaseArray( exercisesRef );
-
-        // todo тестовый пользователь, потом удалить
-        var testUserRef = new Firebase( FIREBASE_URL + 'users/-Jsiscs19tncANzV2ti5' );
-        var testUserObj = $firebaseObject( testUserRef );
-        self.getTestUser = function(call_back){
-            return testUserObj.$loaded( call_back );
-        };
-        // ~~~ ~~~
+        //var exercisesArr = $firebaseArray( exercisesRef );
+        //var exercisesObj = $firebaseObject( exercisesRef );
 
         // получение списка упражнений пользователя
         self.getUserExercises = function(call_back){
-            return exercisesArr.$loaded( call_back );
+            var exercisesOfUserRef = exercisesRef.orderByChild('ownerid').equalTo( $rootScope.currentUser.id );
+            var exercisesOfUserArr = $firebaseArray( exercisesOfUserRef );
+
+            return exercisesOfUserArr.$loaded( call_back );
         };
-        // ~~~ ~~~
+        // ~~~ self.getUserExercises ~~~
 
         // добавление нового упражнения
         self.exerciseAdd = function ( _exercise ) {
+            _exercise.ownerid = $rootScope.currentUser.id;
             exercisesRef.push( _exercise );
         };
-        // ~~~ ~~~
+        // ~~~ self.exerciseAdd ~~~
 
         // редактирование упражнения
-        self.exerciseEdit = function ( _exercise ) {
-            return exercisesArr.$save( _exercise );
+        self.exerciseEdit = function ( _exerciseId, _exercise ) {
+            var onComplete = function(error) {
+                if (error) {
+                    $log.debug('exerciseEdit Synchronization failed');
+                } else {
+                    $log.debug('exerciseEdit Synchronization succeeded');
+                }
+            };
+
+            exercisesRef.child( _exerciseId ).update( _exercise, onComplete );
         };
-        // ~~~ ~~~
+        // ~~~ self.exerciseEdit ~~~
 
         // удаление упражнения
         self.exerciseDelete = function ( _exercise ) {
@@ -56,28 +65,13 @@
 
             return ref.remove();
         };
-        // ~~~ ~~~
+        // ~~~ self.exerciseDelete ~~~
 
-
-
-        // todo вообще не нужный код, видимо я его дернул из примера на видео
-        self.getUsers = function(call_back){
-            return usersArr.$loaded( call_back );
+        // редактирование пользователя
+        self.accountProfileEdit = function ( _userid, _userData ) {
+            usersRef.child( _userid ).set( _userData );
         };
-
-        self.addUser = function( _user ){
-            usersRef.push( _user );
-        };
-
-        refObj.$loaded(function(){
-            self.dbObj = refObj;
-        });
-
-        refArr.$loaded(function(){
-            self.dbArr = refArr;
-        });
-        // todo вообще не нужный код, видимо я его дернул из примера на видео
-
+        // ~~~ self.accountProfileEdit ~~~
     }
 
 })();

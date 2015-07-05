@@ -9,7 +9,7 @@
 
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="inputName" placeholder="Имя пользователя"
-                                            ng-model="vm.testUser.name"
+                                            ng-model="vm.userProfileObj.name"
                                                 >
                                     </div>
                                 </div>
@@ -18,7 +18,7 @@
 
                                     <div class="col-lg-8">
                                         <input type="email" class="form-control" id="inputEmail" placeholder="Электронная почта"
-                                            ng-model="vm.testUser.email"
+                                            ng-model="vm.userProfileObj.email"
                                                 >
                                     </div>
                                 </div>
@@ -27,7 +27,7 @@
 
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="inputWeight" placeholder="Масса тела"
-                                            ng-model="vm.testUser.weight"
+                                            ng-model="vm.userProfileObj.weight"
                                                 >
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
 
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="inputHeight" placeholder="Рост"
-                                            ng-model="vm.testUser.height"
+                                            ng-model="vm.userProfileObj.height"
                                                 >
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
 
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="inputDateOfBirth" placeholder="Дата рождения"
-                                            ng-model="vm.testUser.birthday"
+                                            ng-model="vm.userProfileObj.birthdate"
                                                 >
 
 <!--<div class="dropdown">-->
@@ -94,7 +94,7 @@
 
                                 <div class="form-group">
                                     <div class="col-lg-8 col-lg-offset-4">
-                                        <button type="submit" class="btn btn-success">Сохранить</button>
+                                        <button ng-click="vm.accountProfileEdit()" class="btn btn-success">Сохранить</button>
                                         <button class="btn btn-warning">Отменить</button>
                                     </div>
                                 </div>

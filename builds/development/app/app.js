@@ -31,10 +31,12 @@
             'authfire.factory',
             'ui.router',
             'chart.js',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'angular-storage'
         ])
         .constant('FIREBASE_URL', 'https://nggirlsfit.firebaseio.com/')
-        .config(ngGFConfig);
+        .config(ngGFConfig)
+        .run(run);
 
     ngGFConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$logProvider'];
 
@@ -59,6 +61,13 @@
         ; // ~~~ $urlRouterProvider ~~~
 
     } // ~~~ ngGFConfig ~~~
+
+    run.$inject = ['$rootScope', '$state', 'store'];
+
+    function run($rootScope, $state, store) {
+        $rootScope.currentUser  = store.get('currentUser');
+    } // ~~~ run ~~~
+
 
 })();
 

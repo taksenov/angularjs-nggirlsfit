@@ -42,16 +42,20 @@
                                  ngfitfire, AuthfireFactory ) {
 
         var vm = this;
+        vm.userProfileObj = $rootScope.currentUser;
 
-        // todo Добавление тестового пользователя в профиль, удалить после тестирования
-        ngfitfire.getTestUser( function (_data) {
-            vm.testUser = _data;
+        console.log( '$rootScope.currentUser', $rootScope.currentUser );
 
-            $rootScope.testUserNameRootScope = vm.testUser.name;
+        vm.accountProfileEdit = function () {
+            for (var i in vm.userProfileObj) {
+                if ( typeof( vm.userProfileObj[i] ) === 'undefined'  ) {
+                    vm.userProfileObj[i] = '';
+                }
+            }
+//            console.log( '$rootScope.currentUser', vm.userProfileObj );
+            ngfitfire.accountProfileEdit( vm.userProfileObj.id, vm.userProfileObj );
+        }; // ~~~ vm.accountProfileEdit ~~~
 
-            //console.log( vm.testUser.name );
-
-        } );
 
     } // ~~~ profileAccountCtrl ~~~
 

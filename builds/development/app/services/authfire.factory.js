@@ -12,11 +12,11 @@
 
     authfireFactory.$inject = [ '$firebaseAuth', '$rootScope',
                          'FIREBASE_URL', '$log',
-                         '$firebaseObject'  ];
+                         '$firebaseObject', 'store' ];
 
     function authfireFactory( $firebaseAuth, $rootScope,
                        FIREBASE_URL, $log,
-                       $firebaseObject ) {
+                       $firebaseObject, store ) {
 
         var ref = new Firebase( FIREBASE_URL );
         var auth = $firebaseAuth( ref );
@@ -79,6 +79,8 @@
 
             logout: function (  ) {
                 ref.unauth();
+                store.set('currentUser', null);
+                $rootScope.currentUser = null;
             },  // ~~~ logout ~~~
 
             isSignedIn: function (  ) {
@@ -97,12 +99,15 @@
                 })
                 .then( function ( userData ) {
                     $log.debug( 'User ' + userData.uid + ' created!' );
+                    $log.debug( 'User registration data ',  _user );
+
 
                     var userRef = ref.child('users').child(userData.uid);
 
                     userRef.set({
                         name: _user.name,
                         email: _user.email,
+                        id: userData.uid,
                         date: Firebase.ServerValue.TIMESTAMP
                     });
 
@@ -128,29 +133,69 @@
 
                 var userRef;
                 var user;
+                var userPicDefault;
+                var currentUser;
 
                 if ( authData.google && authData.google.id ) {
-                    userRef = ref.child('users').child( authData.google.id );
+                    userRef = ref.child('users').child( authData.google.id);
+                    user = $firebaseObject(userRef);
+                    user.$loaded().then(
+                        function () {
+                            userPicDefault = user.avatar;
+                        }
+                    );
                 } else if ( authData.facebook && authData.facebook.id ) {
                     userRef = ref.child('users').child( authData.facebook.id );
+                    user = $firebaseObject(userRef);
+                    user.$loaded().then( function () {
+                        if ( user.avatar ) {
+                            $log.debug( 'Facebook аватарка загружена повтороно' );
+                            userPicDefault = user.avatar;
+                        } else {
+                            $log.debug( 'Facebook аватарка загружена впервые' );
+                            userPicDefault = user.userpic.data.url;
+                        }
+                    });
                 } else if ( authData.twitter && authData.twitter.id ) {
                     userRef = ref.child('users').child( authData.twitter.id );
+                    user = $firebaseObject(userRef);
+                    user.$loaded().then(
+                        function () {
+                            userPicDefault = user.avatar;
+                        }
+                    );
                 } else {
                     userRef = ref.child('users').child(authData.uid);
+                    user = $firebaseObject(userRef);
+                    userPicDefault = '../img/nggirlsfit-no-avatar.jpg';
                 }
 
-                user = $firebaseObject(userRef);
-
                 user.$loaded().then( function (  ) {
-                    $rootScope.currentUser = user;
+                    var currentUser = {
+                        id: user.$id,
+                        email: user.email,
+                        name: user.name,
+                        weight: user.weight,
+                        height: user.height,
+                        birthdate: user.birthdate,
+                        avatar: userPicDefault,
+                        token: user.token,
+                        uid: user.uid,
+                        expires: user.expires,
+                        accesstoken: user.accesstoken,
+                        lastactivity: user.lastactivity
+                    };
+                    store.set('currentUser', currentUser);
+                    $rootScope.currentUser = currentUser;
                 });
             } else {
+                store.set('currentUser', null);
                 $rootScope.currentUser = null;
             }
         } // ~~~ authDataCallBack ~~~
 
         function authHandle ( authData ) {
-            console.log( 'Authenticated success!', authData );
+            $log.debug( 'Authenticated success!', authData );
         } // ~~~ authHandle ~~~
 
         //function vkontakteSocialAuthHandle ( error, authData ) {
@@ -226,7 +271,7 @@
                         userRef.set({
                             'email': authData.facebook.email,
                             'name': authData.facebook.displayName,
-                            'avatar': authData.facebook.cachedUserProfile.picture, // https://developers.facebook.com/docs/graph-api/reference/user/
+                            'userpic': authData.facebook.cachedUserProfile.picture, // https://developers.facebook.com/docs/graph-api/reference/user/
                             'id': authData.facebook.id,
                             'token': authData.token,
                             'uid': authData.uid,

@@ -113,6 +113,10 @@ gulp.task('libs', function() {
         .pipe(gulp.dest('./builds/dist/libs/whhg-font/'));
     // -----
 
+    // Подключение angular-storage
+    gulp.src(bc + 'a0-angular-storage/dist/**/*')
+        .pipe(gulp.dest('./builds/dist/libs/a0-angular-storage/'));
+    // -----
 
     gulp.src([bc+'angular/angular.js',
             bc+'angular-animate/angular-animate.js',

@@ -37,29 +37,46 @@
         $scope.exercise = exercise;
         vm.isEdit = isEdit;
 
-        vm.exerciseEdit = function () {
-            ngfitfire.exerciseEdit($scope.exercise).then(
-                function () {
-                    $scope.exercise = null;
-                }
-            );
+        vm.exerciseEdit = function ( _id, _exersiceObj ) {
+            ngfitfire.exerciseEdit( _id, _exersiceObj );
         }; // ~~~ vm.exerciseEdit ~~~
 
         vm.exerciseAdd = function () {
             ngfitfire
-                .exerciseAdd($scope.exercise,
+                .exerciseAdd( $scope.exercise,
                     function () {
                         $scope.exercise = null;
                     }
                 );
         }; // ~~~ vm.exerciseAdd ~~~
 
-
         $scope.ok = function () {
 
             if ( vm.isEdit ) {
                 $log.debug('Редактируем упражнение');
-                vm.exerciseEdit();
+
+                vm.exersiceObj = {
+                    //id: $scope.exercise.$id,
+                    description: $scope.exercise.description,
+                    exerciseCount: $scope.exercise.exerciseCount,
+                    name: $scope.exercise.name,
+                    img: $scope.exercise.img,
+                    video: $scope.exercise.video,
+                    ownerid: $rootScope.currentUser.id,
+                    repeatCount: $scope.exercise.repeatCount,
+                    time: $scope.exercise.time
+                };
+
+                for (var i in vm.exersiceObj) {
+                    if ( typeof( vm.exersiceObj[i] ) === 'undefined'  ) {
+                        vm.exersiceObj[i] = '';
+                    }
+                }
+
+                vm.exerciseEdit( $scope.exercise.$id, vm.exersiceObj );
+
+                $scope.exercise = null;
+                vm.exersiceObj = {};
 
             } else {
                 $log.debug('Добавляем новое упражнение');
@@ -100,9 +117,7 @@
     function exercisesBlocksCtrl($scope, $rootScope, ngfitfire, $modal) {
 
         var vm = this;
-
         $scope.animationsEnabled = true;
-
 
         ngfitfire.getUserExercises( function ( _data ) {
             vm.userExercises = _data;
