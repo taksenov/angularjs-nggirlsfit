@@ -9,9 +9,9 @@
         .module('ngGirlsFit.firebase.service', ['firebase'])
         .service('ngfitfire', ngfitfire);
 
-    ngfitfire.$inject = ['FIREBASE_URL', '$firebaseObject', '$firebaseArray', '$log'];
+    ngfitfire.$inject = ['FIREBASE_URL', '$firebaseObject', '$firebaseArray', '$log', '$rootScope'];
 
-    function ngfitfire(FIREBASE_URL, $firebaseObject, $firebaseArray, $log){
+    function ngfitfire(FIREBASE_URL, $firebaseObject, $firebaseArray, $log, $rootScope){
 
         var self = this;
 
@@ -24,18 +24,21 @@
         var exercisesArr = $firebaseArray( exercisesRef );
 
         // todo тестовый пользователь, потом удалить
-        var testUserRef = new Firebase( FIREBASE_URL + 'users/-Jsiscs19tncANzV2ti5' );
-        var testUserObj = $firebaseObject( testUserRef );
-        self.getTestUser = function(call_back){
-            return testUserObj.$loaded( call_back );
-        };
+        //var testUserRef = new Firebase( FIREBASE_URL + 'users/-Jsiscs19tncANzV2ti5' );
+        //var testUserObj = $firebaseObject( testUserRef );
+        //self.getTestUser = function(call_back){
+        //    return testUserObj.$loaded( call_back );
+        //};
         // ~~~ ~~~
 
         // получение списка упражнений пользователя
         self.getUserExercises = function(call_back){
-            return exercisesArr.$loaded( call_back );
+            var exercisesOfUserRef = exercisesRef.orderByChild('ownerid').equalTo( $rootScope.currentUser.id );
+            var exercisesOfUserArr = $firebaseArray( exercisesOfUserRef );
+
+            return exercisesOfUserArr.$loaded( call_back );
         };
-        // ~~~ ~~~
+        // ~~~ self.getUserExercises ~~~
 
         // добавление нового упражнения
         self.exerciseAdd = function ( _exercise ) {
@@ -63,21 +66,21 @@
 
 
         // todo вообще не нужный код, видимо я его дернул из примера на видео
-        self.getUsers = function(call_back){
-            return usersArr.$loaded( call_back );
-        };
-
-        self.addUser = function( _user ){
-            usersRef.push( _user );
-        };
-
-        refObj.$loaded(function(){
-            self.dbObj = refObj;
-        });
-
-        refArr.$loaded(function(){
-            self.dbArr = refArr;
-        });
+        //self.getUsers = function(call_back){
+        //    return usersArr.$loaded( call_back );
+        //};
+        //
+        //self.addUser = function( _user ){
+        //    usersRef.push( _user );
+        //};
+        //
+        //refObj.$loaded(function(){
+        //    self.dbObj = refObj;
+        //});
+        //
+        //refArr.$loaded(function(){
+        //    self.dbArr = refArr;
+        //});
         // todo вообще не нужный код, видимо я его дернул из примера на видео
 
     }

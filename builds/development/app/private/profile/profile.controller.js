@@ -43,15 +43,15 @@
 
         var vm = this;
 
-        // todo Добавление тестового пользователя в профиль, удалить после тестирования
-        ngfitfire.getTestUser( function (_data) {
-            vm.testUser = _data;
-
-            $rootScope.testUserNameRootScope = vm.testUser.name;
-
-            //console.log( vm.testUser.name );
-
-        } );
+        //// todo Добавление тестового пользователя в профиль, удалить после тестирования
+        //ngfitfire.getTestUser( function (_data) {
+        //    vm.testUser = _data;
+        //
+        //    $rootScope.testUserNameRootScope = vm.testUser.name;
+        //
+        //    //console.log( vm.testUser.name );
+        //
+        //} );
 
     } // ~~~ profileAccountCtrl ~~~
 
