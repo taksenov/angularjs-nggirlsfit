@@ -43,11 +43,13 @@
         };
         // ~~~ ~~~
 
+// 2Zar&Roman код редактирующий упражнение
         // редактирование упражнения
         self.exerciseEdit = function ( _exercise ) {
             return exercisesArr.$save( _exercise );
         };
         // ~~~ ~~~
+// 2Zar&Roman код редактирующий упражнение
 
         // удаление упражнения
         self.exerciseDelete = function ( _exercise ) {

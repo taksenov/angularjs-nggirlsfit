@@ -37,6 +37,8 @@
         $scope.exercise = exercise;
         vm.isEdit = isEdit;
 
+
+// 2Zar&Roman код редактирующий упражнение
         vm.exerciseEdit = function () {
             ngfitfire.exerciseEdit($scope.exercise).then(
                 function () {
@@ -44,6 +46,8 @@
                 }
             );
         }; // ~~~ vm.exerciseEdit ~~~
+// 2Zar&Roman код редактирующий упражнение
+
 
         vm.exerciseAdd = function () {
             ngfitfire
@@ -57,9 +61,13 @@
 
         $scope.ok = function () {
 
+
             if ( vm.isEdit ) {
+
+// 2Zar&Roman код редактирующий упражнение
                 $log.debug('Редактируем упражнение');
                 vm.exerciseEdit();
+// 2Zar&Roman код редактирующий упражнение
 
             } else {
                 $log.debug('Добавляем новое упражнение');
