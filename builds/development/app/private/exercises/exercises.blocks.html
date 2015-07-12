@@ -19,26 +19,41 @@
     </div>
     <!-- добавить упражнение -->
 
-    <div class="col-lg-6" ng-repeat="exercise in vm.userExercises">
-        <div class="thumbnail">
-            <img class="img-responsive" ng-src="..{{ exercise.img }}" src=""
-                 alt="{{ exercise.name }}"/>
 
-            <div class="caption">
-                <div class="text-center">
-                    <h3>
-                        {{ exercise.name }}
-                    </h3>
-                </div>
-                <div class="text-center">
-                    <p>
-                        <button class="btn btn-success" ng-click="vm.editUserExercise(exercise)">Редактировать</button>
-                        <button class="btn btn-danger" ng-click="vm.exerciseDelete(exercise)">Удалить</button>
-                    </p>
+    <form class="form-horizontal">
+
+        <div class="col-lg-6" ng-repeat="exercise in vm.userExercises | filter : exerciseFilter : false">
+            <div class="thumbnail">
+                <img class="img-responsive" ng-src="{{ exercise.img }}" src=""
+                     alt="{{ exercise.name }}"/>
+
+                <div class="caption">
+                    <div class="text-center gf-exercise-caption__word-wrap">
+                        <h3>
+                            {{ exercise.name }}
+                        </h3>
+                    </div>
+
+                        <div class="togglebutton">
+                            <label>
+                                <input type="checkbox"
+                                       ng-model="exercise.isWorkout"
+                                       ng-change="vm.exerciseBlockChange(exercise)"
+                                        > <span ng-if="exercise.isWorkout">Добавлено в тренировку</span>
+                                          <span ng-if="!exercise.isWorkout">Убрано из тренировки</span>
+                            </label>
+                        </div>
+
+
+                    <div class="text-center">
+                        <p>
+                            <button class="btn btn-success" ng-click="vm.editUserExercise(exercise)">Редактировать</button>
+                            <button class="btn btn-danger" ng-click="vm.exerciseDelete(exercise)">Удалить</button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
+    </form>
 

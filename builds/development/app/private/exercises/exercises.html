@@ -58,10 +58,25 @@
                         <!-- отображение на больших экранах -->
                         <div class="col-md-6 col-lg-6 hidden-xs hidden-sm">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Фильтр...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">Go!</button>
+                                <input type="text" class="form-control" placeholder="Фильтр..."
+                                       ng-model="exerciseFilter.name"
+                                        >
+
+                                <span ng-hide="exerciseFilter.name" class="input-group-btn">
+                                    <button class="btn btn-primary" type="button"
+                                            ng-click="exerciseFilter.name = ''"
+                                            >Фильтр
+                                    </button>
                                 </span>
+
+                                <span ng-show="exerciseFilter.name" class="input-group-btn">
+                                    <button class="btn btn-primary" type="button"
+                                            ng-click="exerciseFilter.name = ''">
+                                                <i class="mdi-navigation-close"></i>
+                                    </button>
+                                </span>
+
+
                             </div>
                         </div>
 
@@ -83,10 +98,24 @@
                         <!-- отображение на телефонах -->
                         <div class="col-xs-12 col-sm-12 hidden-md hidden-lg gf-exercises__filter-xs">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Фильтр...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">Go!</button>
+                                <input type="text" class="form-control" placeholder="Фильтр..."
+                                    ng-model="exerciseFilter.name"
+                                     >
+
+                                <span ng-hide="exerciseFilter.name" class="input-group-btn">
+                                    <button class="btn btn-primary" type="button"
+                                            ng-click="exerciseFilter.name = ''"
+                                            >Фильтр
+                                    </button>
                                 </span>
+
+                                <span ng-show="exerciseFilter.name" class="input-group-btn">
+                                    <button class="btn btn-primary" type="button"
+                                            ng-click="exerciseFilter.name = ''">
+                                                <i class="mdi-navigation-close"></i>
+                                    </button>
+                                </span>
+
                             </div>
                         </div>
 

@@ -40,6 +40,13 @@
         // добавление нового упражнения
         self.exerciseAdd = function ( _exercise ) {
             _exercise.ownerid = $rootScope.currentUser.id;
+            _exercise.isWorkout = false;
+            $log.debug( 'Картинка в новом упражнении =', _exercise.img        );
+            if ( typeof( _exercise.img ) === 'undefined' ||
+                 _exercise.img  === '' ) {
+                _exercise.img = '../img/nggirlsfit-exercises-001.jpg'
+            }
+
             exercisesRef.push( _exercise );
         };
         // ~~~ self.exerciseAdd ~~~
@@ -53,6 +60,12 @@
                     $log.debug('exerciseEdit Synchronization succeeded');
                 }
             };
+
+            // проверка картинки, если из вне прийдет undefined или '' то меняется на дефолтную картинку
+            if ( typeof( _exercise.img ) === 'undefined' ||
+                 _exercise.img  === '' ) {
+                _exercise.img = '../img/nggirlsfit-exercises-001.jpg'
+            }
 
             exercisesRef.child( _exerciseId ).update( _exercise, onComplete );
         };

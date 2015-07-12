@@ -8,37 +8,48 @@
 
     <div class="modal-body">
 
-        <form class="form-horizontal">
+        <form class="form-horizontal gf-exercise-form__addnew_editexist" name="exerciseForm">
             <fieldset>
                 <div class="form-group">
-                    <label for="inputExerciseName" class="col-lg-4 control-label">Название</label>
+                    <label for="inputExerciseName" class="col-lg-4 control-label">
+                        Название<span class="gf-red-asterics">*</span>
+                    </label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control"
                                id="inputExerciseName"
                                placeholder="Название"
-                               ng-model="exercise.name">
+                               ng-model="exercise.name"
+                               required >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputExerciseText" class="col-lg-4 control-label">Описание</label>
+                    <label for="inputExerciseText" class="col-lg-4 control-label">
+                        Описание<span class="gf-red-asterics">*</span>
+                    </label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control"
                                id="inputExerciseText"
                                placeholder="Описание"
-                               ng-model="exercise.description">
+                               ng-model="exercise.description"
+                               required >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputExerciseImg" class="col-lg-4 control-label">Картинка</label>
+                    <label for="inputExerciseImg" class="col-lg-4 control-label">
+                        Картинка
+                    </label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control"
                                id="inputExerciseImg"
                                placeholder="Картинка"
-                               ng-model="exercise.img">
+                               ng-model="exercise.img"
+                                >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputExerciseVideo" class="col-lg-4 control-label">Видео</label>
+                    <label for="inputExerciseVideo" class="col-lg-4 control-label">
+                        Видео
+                    </label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control"
                                id="inputExerciseVideo"
@@ -47,7 +58,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputExerciseApproachCount" class="col-lg-4 control-label">Количество упражнений</label>
+                    <label for="inputExerciseApproachCount" class="col-lg-4 control-label">
+                        Количество упражнений
+                    </label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control"
                                id="inputExerciseApproachCount"
@@ -56,7 +69,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputExerciseRepeatCount" class="col-lg-4 control-label">Количество подходов</label>
+                    <label for="inputExerciseRepeatCount" class="col-lg-4 control-label">
+                        Количество подходов
+                    </label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control"
                                id="inputExerciseRepeatCount"
@@ -65,21 +80,43 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputExerciseLeadTime" class="col-lg-4 control-label">Время выполнения</label>
+                    <label for="inputExerciseLeadTime" class="col-lg-4 control-label">
+                        Время выполнения<span class="gf-red-asterics">*</span>
+                    </label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control"
+                        <input type="number" class="form-control"
                                id="inputExerciseLeadTime"
-                               placeholder="Время выполнения"
-                               ng-model="exercise.time">
+                               placeholder="Время выполнения (в минутах)"
+                               ng-model="exercise.time"
+                               required >
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="gf-warning-message__borders" ng-if="formIsNotValid">
+                    <span class="text-warning">
+                        Необходимо заполнить поля формы, помеченные <span class="gf-red-asterics">*</span>
+                    </span>
+                </div>
+                <div class="gf-warning-message__borders" ng-if="addNewExercise">
+                    <span class="text-success">
+                        Упражнение добавлено, вы можете добавить еще одно
+                    </span>
+                </div>
+
+
+                <div class="form-group" ng-if="isEditExercise">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="submit" class="btn btn-success" ng-click="ok()">Сохранить</button>
                         <button class="btn btn-warning" ng-click="cancel()">Отменить</button>
                     </div>
                 </div>
+                <div class="form-group" ng-if="!isEditExercise">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-success" ng-click="ok()">Добавить новое</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Отменить</button>
+                    </div>
+                </div>
+
             </fieldset>
         </form>
 

@@ -13,7 +13,7 @@
         <form name="signInForm" class="form-horizontal">
             <fieldset>
                 <div class="form-group">
-                    <label for="inputSingInLogin" class="col-lg-4 control-label">Электронная почта</label>
+                    <label for="inputSingInLogin" class="col-lg-4 control-label">Электронная почта<span class="gf-red-asterics">*</span></label>
                     <div class="col-lg-8">
                         <input type="email" class="form-control"
                                id="inputSingInLogin"
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputSingInPassword" class="col-lg-4 control-label">Пароль</label>
+                    <label for="inputSingInPassword" class="col-lg-4 control-label">Пароль<span class="gf-red-asterics">*</span></label>
                     <div class="col-lg-8">
                         <input type="password" class="form-control"
                                id="inputSingInPassword"
@@ -40,6 +40,17 @@
                             <button class="btn btn-warning" ng-click="cancel()">Отменить</button>
                         </div>
                     </div>
+                </div>
+
+                <div class="gf-warning-message__borders" ng-if="authErrorAllFields">
+                    <span class="text-warning">
+                        Необходимо заполнить поля формы, помеченные <span class="gf-red-asterics">*</span>
+                    </span>
+                </div>
+                <div class="gf-warning-message__borders" ng-if="authErrorBool">
+                    <span class="text-warning">
+                        {{ authError }}
+                    </span>
                 </div>
 
                 <!-- кнопки социальных сетей -->

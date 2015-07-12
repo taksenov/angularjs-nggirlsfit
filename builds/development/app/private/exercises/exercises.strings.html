@@ -21,27 +21,40 @@
     </div>
     <!-- добавить упражнение -->
 
-    <div class="col-lg-12" ng-repeat="exercise in vm.userExercises">
-        <div class="panel gf-panel-material-orange-50">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-left gf-exercise-string__exercise-text">
-                        <h3>
-                            {{ exercise.name }}
-                        </h3>
+    <form class="form-horizontal">
+
+        <div class="col-lg-12" ng-repeat="exercise in vm.userExercises | filter : exerciseFilter : false">
+            <div class="panel gf-panel-material-orange-50">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-left gf-exercise-string__exercise-text gf-exercise-caption__word-wrap">
+                            <h3>
+                                {{ exercise.name }}
+                            </h3>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="text-center gf-exercise-string__exercise-btns">
-                        <p>
-                            <button class="btn btn-success" ng-click="vm.editUserExercise(exercise)">Редактировать</button>
-                            <button class="btn btn-danger" ng-click="vm.exerciseDelete(exercise)">Удалить</button>
-                        </p>
+                    <div class="col-lg-6">
+                        <div class="text-center gf-exercise-string__exercise-btns">
+                            <p>
+
+                                <div class="togglebutton">
+                                    <label>
+                                        <input type="checkbox"
+                                               ng-model="exercise.isWorkout"
+                                               ng-change="vm.exerciseBlockChange(exercise)"
+                                                > <span ng-if="exercise.isWorkout">Добавлено в тренировку</span>
+                                                  <span ng-if="!exercise.isWorkout">Убрано из тренировки</span>
+                                    </label>
+                                </div>
+
+                                <button class="btn btn-success" ng-click="vm.editUserExercise(exercise)">Редактировать</button>
+                                <button class="btn btn-danger" ng-click="vm.exerciseDelete(exercise)">Удалить</button>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
+    </form>
 

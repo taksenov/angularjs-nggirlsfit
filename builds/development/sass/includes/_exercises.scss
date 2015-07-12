@@ -64,6 +64,24 @@
 .gf-panel-material-grey-500 {
     background-color: #FAFAFA;
 }
+
+//.gf-exercise-form__addnew_editexist input.ng-invalid {
+//    background-color: rgba(250, 64, 44, 0.20);
+//}
 //
+//.gf-exercise-form__addnew_editexist input.ng-valid.ng-touched {
+//    color: #2a2a2a;
+//}
 
+.gf-red-asterics {
+    color: orangered;
+}
 
+.gf-warning-message__borders {
+    border-bottom: 1px solid #b8b8b8;
+    border-top: 1px solid #b8b8b8;
+}
+
+.gf-exercise-caption__word-wrap {
+    word-wrap: break-word;
+}

@@ -8,37 +8,28 @@
     angular
         .module( 'authfire.factory', [ 'firebase' ] )
         .factory( 'AuthfireFactory', authfireFactory )
+        .constant( 'pathToRedirect', 'profile' )                // настройка редиректа, по какому пути переходить после авторизации
     ;
 
     authfireFactory.$inject = [ '$firebaseAuth', '$rootScope',
                          'FIREBASE_URL', '$log',
-                         '$firebaseObject', 'store' ];
+                         '$firebaseObject', 'store',
+                         '$location', 'pathToRedirect' ];
 
     function authfireFactory( $firebaseAuth, $rootScope,
                        FIREBASE_URL, $log,
-                       $firebaseObject, store ) {
+                       $firebaseObject, store,
+                       $location, pathToRedirect ) {
 
         var ref = new Firebase( FIREBASE_URL );
         var auth = $firebaseAuth( ref );
         var authObj = {
 
-            //vkontakteLogin: function ( _user, authHandler ) {
-            //
-            //    authHandler = typeof authHandler !== 'undefined' ? authHandler : vkontakteSocialAuthHandle;
-            //
-            //    ref.authWithOAuthPopup( "vkontakte", authHandler, {
-            //
-            //    } )
-            //
-            //}, // ~~~ vkontakteLogin ~~~
-
             twitterLogin: function ( _user, authHandler ) {
 
                 authHandler = typeof authHandler !== 'undefined' ? authHandler : twitterSocialAuthHandle;
 
-                ref.authWithOAuthPopup( "twitter", authHandler, {
-
-                } )
+                ref.authWithOAuthPopup( "twitter", authHandler, {} )
 
             }, // ~~~ twitterLogin ~~~
 
@@ -72,6 +63,8 @@
                     .then( authHandler )
                     .catch( function ( error ) {
                         $log.error( 'Authentication error: ', error );
+                        $rootScope.authError = 'Вы ошиблись при вводе пары логин/пароль';
+                        $rootScope.authErrorBool = true;
                     })
                 ; // ~~~ auth.$authWithPassword ~~~
 
@@ -112,12 +105,21 @@
                     });
 
                     return auth.$authWithPassword({
-                        email: _user.email,
-                        password: _user.password
-                    });
+                               email: _user.email,
+                               password: _user.password
+                            }).then( function () {
+                                // редирект в профиль пользователя
+                                $log.debug('Редирект в профиль пользователя. Регистрация нового');
+                                $location.path(pathToRedirect).replace();
+                                // закрыть модальное окно
+                                $rootScope.modalInstance.close();
+                                $rootScope.modalInstance = null;
+                            });
                 }) // ~~~ then ~~~
                 .catch( function ( error ) {
                     $log.error( 'Create user errror ', error );
+                    $rootScope.authError = 'В процессе регистрации возникли ошибки. Попробуйте повторить попытку позже';
+                    $rootScope.signUpErrorBool = true;
                 }); // ~~~ catch ~~~
             } // ~~~signUp ~~~
 
@@ -196,36 +198,12 @@
 
         function authHandle ( authData ) {
             $log.debug( 'Authenticated success!', authData );
+            // закрыть модальное окно
+            $rootScope.modalInstance.close();
+            $rootScope.modalInstance = null;
+            // редирект в профиль пользователя
+            $location.path(pathToRedirect).replace();
         } // ~~~ authHandle ~~~
-
-        //function vkontakteSocialAuthHandle ( error, authData ) {
-        //    if ( error ) {
-        //        $log.error( 'vkontakte Social Authentication error: ', error );
-        //    } else {
-        //        $log.debug( 'vkontakte Authentication data: ', authData );
-        //        //var userRef = ref.child('users').child( authData.vkontakte.id );
-        //        //var user = $firebaseObject( userRef );
-        //        //
-        //        //user.$loaded( function () {
-        //        //    if ( user.username ) {
-        //        //        userRef.child( 'lastactivity').set( Firebase.ServerValue.TIMESTAMP );
-        //        //    } else {
-        //        //        userRef.set({
-        //        //            'username': authData.vkontakte.username,
-        //        //            'name': authData.vkontakte.displayName,
-        //        //            'avatar': authData.vkontakte.cachedUserProfile.profile_image_url, // https://dev.twitter.com/overview/api/users
-        //        //            'id': authData.vkontakte.id,
-        //        //            'token': authData.token,
-        //        //            'uid': authData.uid,
-        //        //            'expires': authData.expires,
-        //        //            'accesstoken': authData.vkontakte.accessToken,
-        //        //            'lastactivity': Firebase.ServerValue.TIMESTAMP
-        //        //        });
-        //        //    }
-        //        //})
-        //
-        //    }
-        //} // ~~~ vkontakteSocialAuthHandle ~~~
 
         function twitterSocialAuthHandle ( error, authData ) {
             if ( error ) {
@@ -251,7 +229,11 @@
                             'lastactivity': Firebase.ServerValue.TIMESTAMP
                         });
                     }
-                })
+                });
+
+                // редирект в профиль пользователя
+                $log.debug('Редирект в профиль пользователя');
+                $location.path(pathToRedirect).replace();
 
             }
         } // ~~~ twitterSocialAuthHandle ~~~
@@ -280,7 +262,11 @@
                             'lastactivity': Firebase.ServerValue.TIMESTAMP
                         });
                     }
-                })
+                });
+
+                // редирект в профиль пользователя
+                $log.debug('Редирект в профиль пользователя');
+                $location.path(pathToRedirect).replace();
 
             }
         } // ~~~ facebookSocialAuthHandle ~~~
@@ -309,7 +295,11 @@
                             'lastactivity': Firebase.ServerValue.TIMESTAMP
                         });
                     }
-                })
+                });
+
+                // редирект в профиль пользователя
+                $log.debug('Редирект в профиль пользователя');
+                $location.path(pathToRedirect).replace();
 
             }
         } // ~~~ googleSocialAuthHandle ~~~

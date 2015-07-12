@@ -16,8 +16,12 @@
     exercisesCtrl.$inject = [ '$scope', '$rootScope',
                               'ngfitfire', '$modal',
                               'AuthfireFactory' ];
-    exercisesBlocksCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire', '$modal'];
-    exercisesStringsCtrl.$inject = ['$scope', '$rootScope', 'ngfitfire', '$modal'];
+    exercisesBlocksCtrl.$inject = [ '$scope', '$rootScope',
+                                    'ngfitfire', '$modal',
+                                    '$log' ];
+    exercisesStringsCtrl.$inject = [ '$scope', '$rootScope',
+                                     'ngfitfire', '$modal',
+                                     '$log' ];
     modalInstanceCtrl.$inject = [
                                 '$scope', '$modal', '$log', '$rootScope',
                                 'ngfitfire', '$modalInstance',
@@ -36,12 +40,18 @@
         $scope.modalCaption = modalCaption;
         $scope.exercise = exercise;
         vm.isEdit = isEdit;
+        $scope.isEditExercise = isEdit;
+        vm.isFormValid = false;
+        $scope.formIsNotValid = false;
+        $scope.addNewExercise = false;
 
         vm.exerciseEdit = function ( _id, _exersiceObj ) {
             ngfitfire.exerciseEdit( _id, _exersiceObj );
         }; // ~~~ vm.exerciseEdit ~~~
 
         vm.exerciseAdd = function () {
+            //$scope.exercise.isWorkout = false;
+            //$scope.exercise.isWorkout = false;
             ngfitfire
                 .exerciseAdd( $scope.exercise,
                     function () {
@@ -52,38 +62,50 @@
 
         $scope.ok = function () {
 
-            if ( vm.isEdit ) {
-                $log.debug('Редактируем упражнение');
+            vm.isFormValid = $scope.exerciseForm.$valid;
 
-                vm.exersiceObj = {
-                    //id: $scope.exercise.$id,
-                    description: $scope.exercise.description,
-                    exerciseCount: $scope.exercise.exerciseCount,
-                    name: $scope.exercise.name,
-                    img: $scope.exercise.img,
-                    video: $scope.exercise.video,
-                    ownerid: $rootScope.currentUser.id,
-                    repeatCount: $scope.exercise.repeatCount,
-                    time: $scope.exercise.time
-                };
+            if ( vm.isFormValid ) {
 
-                for (var i in vm.exersiceObj) {
-                    if ( typeof( vm.exersiceObj[i] ) === 'undefined'  ) {
-                        vm.exersiceObj[i] = '';
+                if ( vm.isEdit ) {
+                    $log.debug('Редактируем упражнение');
+
+                    vm.exersiceObj = {
+                        //id: $scope.exercise.$id,
+                        description: $scope.exercise.description,
+                        exerciseCount: $scope.exercise.exerciseCount,
+                        name: $scope.exercise.name,
+                        img: $scope.exercise.img,
+                        video: $scope.exercise.video,
+                        ownerid: $rootScope.currentUser.id,
+                        repeatCount: $scope.exercise.repeatCount,
+                        time: $scope.exercise.time
+                    };
+
+                    for (var i in vm.exersiceObj) {
+                        if ( typeof( vm.exersiceObj[i] ) === 'undefined'  ) {
+                            vm.exersiceObj[i] = '';
+                        }
                     }
+
+                    vm.exerciseEdit( $scope.exercise.$id, vm.exersiceObj );
+
+                    $scope.exercise = null;
+                    vm.exersiceObj = {};
+                    $modalInstance.close();
+
+                } else {
+                    $log.debug('Добавляем новое упражнение');
+                    vm.exerciseAdd();
+                    $scope.exercise = null;
+                    $scope.formIsNotValid = false;
+                    $scope.addNewExercise = true;
                 }
 
-                vm.exerciseEdit( $scope.exercise.$id, vm.exersiceObj );
-
-                $scope.exercise = null;
-                vm.exersiceObj = {};
-
             } else {
-                $log.debug('Добавляем новое упражнение');
-                vm.exerciseAdd();
+                $scope.formIsNotValid = true;
+                $scope.addNewExercise = false;
             }
 
-            $modalInstance.close();
         };
 
         $scope.cancel = function () {
@@ -112,12 +134,44 @@
             AuthfireFactory.logout();
         }; // ~~~ vm.logout ~~~
 
+        //var exerciseFilterNameClean;
+        vm.exerciseFilterNameClean = function () {
+            console.log( 'Нужно почистить инпут!' );
+            console.log( $rootScope.exerciseFilter );
+        };
+
+
+
     } // ~~~ exercisesCtrl ~~~
 
-    function exercisesBlocksCtrl($scope, $rootScope, ngfitfire, $modal) {
+    function exercisesBlocksCtrl($scope, $rootScope,
+                                 ngfitfire, $modal,
+                                 $log ) {
 
         var vm = this;
         $scope.animationsEnabled = true;
+
+        vm.exerciseBlockChange = function ( _exercise ) {
+
+            $log.debug( 'Упражнение: ', _exercise );
+
+            vm.exersiceObj = {
+                img: _exercise.img,                                //чтобы картинка не поменялась на дефолтную, она не должна уходить как undefined
+                isWorkout: _exercise.isWorkout
+            };
+
+            for (var i in vm.exersiceObj) {
+                if ( typeof( vm.exersiceObj[i] ) === 'undefined'  ) {
+                    vm.exersiceObj[i] = '';
+                }
+            }
+
+            ngfitfire.exerciseEdit( _exercise.$id, vm.exersiceObj );
+
+            $scope.exercise = null;
+            vm.exersiceObj = {};
+
+        };
 
         ngfitfire.getUserExercises( function ( _data ) {
             vm.userExercises = _data;
@@ -179,11 +233,33 @@
 
     } // ~~~ exercisesBlocksCtrl ~~~
 
-    function exercisesStringsCtrl($scope, $rootScope, ngfitfire, $modal) {
+    function exercisesStringsCtrl( $scope, $rootScope,
+                                   ngfitfire, $modal, $log ) {
 
         var vm = this;
-
         $scope.animationsEnabled = true;
+
+        vm.exerciseBlockChange = function ( _exercise ) {
+
+            $log.debug( 'Упражнение: ', _exercise );
+
+            vm.exersiceObj = {
+                img: _exercise.img,                                //чтобы картинка не поменялась на дефолтную, она не должна уходить как undefined
+                isWorkout: _exercise.isWorkout
+            };
+
+            for (var i in vm.exersiceObj) {
+                if ( typeof( vm.exersiceObj[i] ) === 'undefined'  ) {
+                    vm.exersiceObj[i] = '';
+                }
+            }
+
+            ngfitfire.exerciseEdit( _exercise.$id, vm.exersiceObj );
+
+            $scope.exercise = null;
+            vm.exersiceObj = {};
+
+        };
 
         ngfitfire.getUserExercises( function (_data) {
             vm.userExercises = _data;
